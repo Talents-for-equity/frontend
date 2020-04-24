@@ -2,8 +2,8 @@
   <div class="registration-form">
     <form action>
       <label>Name</label><input type="text" v-model="data.name" /> <br>
-      <label>Password</label><input type="password" v-model="data.password" /> <br>
        <label>Email</label><input type="text" v-model="data.email" /> <br>
+       <label>Password</label><input type="password" v-model="data.password" /> <br>
       <input type="button" v-on:click="sendRegistration" value="Register">
     </form>
   </div>
