@@ -1,7 +1,7 @@
 import { Action, Module, Mutation, VuexModule, getModule } from 'vuex-module-decorators'
 import store from '@/store'
 
-export enum Skills {
+export enum Skill {
   WebDesign,
   UXDesign,
   UIDesign,
@@ -16,6 +16,20 @@ export enum Skills {
   Development
 }
 
+export const skillNames: { [id: number]: string } = {}
+skillNames[Skill.WebDesign] = 'Web design'
+skillNames[Skill.UXDesign] = 'UX Design'
+skillNames[Skill.UIDesign] = 'UI Design'
+skillNames[Skill.WebDevelopment] = 'Web Development'
+skillNames[Skill.InformationArchitecture] = 'Information Architecture'
+skillNames[Skill.BackEnd] = 'Backend'
+skillNames[Skill.ContentMarketing] = 'Content marketing'
+skillNames[Skill.FacebookAds] = 'Facebook Ads'
+skillNames[Skill.PR] = 'PR'
+skillNames[Skill.Consulting] = 'Consulting'
+skillNames[Skill.Mentoring] = 'Mentoring'
+skillNames[Skill.Development] = 'Development'
+
 export enum UserType {
   Seeker,
   Talent
@@ -27,6 +41,12 @@ export enum ProjectType {
   LongTerm,
   Volunteer
 }
+
+export const projectTypeNames: { [id: number]: string } = {}
+projectTypeNames[ProjectType.Startups] = 'Startups'
+projectTypeNames[ProjectType.Personal] = 'Personal'
+projectTypeNames[ProjectType.LongTerm] = 'Long-term'
+projectTypeNames[ProjectType.Volunteer] = 'Volunteer'
 
 export enum PaymentType {
   CreditCard,
@@ -47,7 +67,7 @@ export interface User {
   email: string;
   description: string;
   rating: number;
-  skills: Skills[];
+  skills: Skill[];
   projectTypes: ProjectType[];
   paymentTypes: PaymentType[];
   portfolio: Project[];
@@ -60,7 +80,7 @@ profiles['ruslan@designer.example'] = {
   email: 'ruslan@designer.example',
   description: 'Lorem ipsum designer',
   rating: 4.5,
-  skills: [Skills.UIDesign, Skills.UXDesign],
+  skills: [Skill.UIDesign, Skill.UXDesign],
   projectTypes: [ProjectType.LongTerm],
   paymentTypes: [PaymentType.CreditCard],
   portfolio: [{
