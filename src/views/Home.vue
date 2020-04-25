@@ -1,14 +1,21 @@
 <template>
   <div class="home">
+    <UserInfo></UserInfo>
     <h1>Home</h1>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
+import { Component, Vue } from 'vue-property-decorator'
+import UserInfo from '@/components/UserInfo.vue'
 
-export default {
-  name: 'Home'
+@Component({
+  components: {
+    UserInfo
+  }
+})
+export default class Home extends Vue {
 }
 </script>

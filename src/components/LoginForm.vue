@@ -11,6 +11,7 @@
 <script lang='ts'>
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
 import router from '@/router/index'
+import users from '@/store/modules/users'
 
 @Component
 export default class LoginForm extends Vue {
@@ -19,8 +20,9 @@ export default class LoginForm extends Vue {
     email: ''
   }
 
-  login () {
-    router.push('Home')
+  async login () {
+    await users.getUser(this.data.email)
+    await router.push('/')
   }
 }
 interface LoginData {
