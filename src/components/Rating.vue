@@ -33,7 +33,6 @@ export default class Rating extends Vue {
 
   .rating {
     color: #1667E0;
-    margin-top: 8px;
   }
 
   img {

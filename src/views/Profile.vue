@@ -1,8 +1,10 @@
 <template>
   <div>
-    <button v-on:click="logout">Logout</button>
-    <button v-on:click="edit" v-if="view">Edit</button>
-    <button v-on:click="showView" v-if="!view">View</button>
+    <div class="profileButtons">
+      <button v-on:click="logout">Logout</button>
+      <button v-on:click="edit" v-if="view">Edit</button>
+      <button v-on:click="showView" v-if="!view">View</button>
+    </div>
     <ProfileEdit v-if="!view"/>
     <ProfileView v-if="view"/>
   </div>
@@ -39,6 +41,9 @@ export default class Profile extends Vue {
 }
 </script>
 
-<style>
-
+<style scoped>
+  .profileButtons button {
+    width: 100px !important;
+    margin-right: 1em;
+  }
 </style>

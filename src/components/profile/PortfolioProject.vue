@@ -1,7 +1,7 @@
 <template>
   <div>
     <h4 class="title">{{project.title}}</h4>
-    <div class="rating">Rating: {{project.rating}}</div>
+    <Rating class="rating" :rating="project.rating"></Rating>
     <div class="description">{{project.description}}</div>
     <div class="border"></div>
   </div>
@@ -10,8 +10,13 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { Project } from '@/store/modules/users'
+import Rating from '@/components/Rating.vue'
 
-@Component
+@Component({
+  components: {
+    Rating
+  }
+})
 export default class PortfolioProject extends Vue {
   @Prop() project!: Project
 }
@@ -24,6 +29,7 @@ export default class PortfolioProject extends Vue {
   }
 
   .description {
+    margin-top: 8px;
     font-size: 16px;
     color: #404040;
   }
@@ -32,5 +38,9 @@ export default class PortfolioProject extends Vue {
     border: 1px solid #EBEBEB;
     margin-top: 16px;
     margin-bottom: 16px;
+  }
+
+  .rating {
+    margin-top: 11px;
   }
 </style>

@@ -9,34 +9,38 @@
       <div v-if="isSeeker">Vat number: {{user.vat}}</div>
     </div>
 
-    <div v-if="activeEdit">
+    <div v-if="activeEdit" class="editInputs">
       <div>
-        <div class="label">Last name</div>
-        <input type="text" v-model="userEdit.lastName">
-      </div>
-      <div>
-        <div class="label">First name</div>
-        <input type="text" v-model="userEdit.firstName">
-      </div>
-      <div>
-        <div class="label">Phone number (optional)</div>
-        <input type="text" v-model="userEdit.phone">
-      </div>
-      <div>
-        <div class="label">Zip code</div>
-        <input type="text" v-model="userEdit.zip">
-      </div>
-      <div v-if="isSeeker">
-        <div class="label">Vat number</div>
-        <input type="text" v-model="userEdit.vat">
+        <div class="left">
+          <div class="label">Last name</div>
+          <input type="text" v-model="userEdit.lastName">
+        </div>
+        <div>
+          <div class="label">Phone number (optional)</div>
+          <input type="text" v-model="userEdit.phone">
+        </div>
+        <div>
+          <div class="label">New password</div>
+          <input type="password">
+        </div>
       </div>
       <div>
-        <div class="label">New password</div>
-        <input type="text">
+        <div>
+          <div class="label">First name</div>
+          <input type="text" v-model="userEdit.firstName">
+        </div>
+        <div>
+          <div class="label">Zip code</div>
+          <input type="text" v-model="userEdit.zip">
+        </div>
+        <div v-if="isSeeker">
+          <div class="label">Vat number</div>
+          <input type="text" v-model="userEdit.vat">
+        </div>
       </div>
-      <button v-on:click="dismiss">Dismiss</button>
-      <button v-on:click="save">Save</button>
     </div>
+    <button v-on:click="dismiss">Dismiss</button>
+    <button v-on:click="save">Save</button>
   </div>
 </template>
 
@@ -77,6 +81,32 @@ export default class PersonalData extends Vue {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  button {
+    width: 100px !important;
+    height: 30px !important;
+    margin-right: 1em;
+  }
 
+  input {
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 7px;
+    height: 30px;
+  }
+
+  .label {
+    font-weight: 500;
+    font-size: 16px;
+    color: #595959;
+  }
+
+  .editInputs {
+    display: flex;
+    margin-bottom: 1em;
+
+    .left {
+      padding-right: 2em;
+    }
+  }
 </style>

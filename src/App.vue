@@ -43,6 +43,7 @@ export default class Home extends Vue {
     width: 235px;
     height: 40px;
     color: white;
+    cursor: pointer;
   }
 }
 </style>

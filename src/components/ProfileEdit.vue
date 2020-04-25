@@ -1,32 +1,36 @@
 <template>
-  <div>
-    <ProfileHeader></ProfileHeader>
-    <div class="typeOfProjects">
-      <HighlightOption highlight-title="Type of payment" :options="paymentOptionsNames"
-                       :highlight-keys="paymentOptionsHighlight" v-on:save="savePaymentOptions"></HighlightOption>
-      <HighlightOption highlight-title="Type of projects" :options="typeOfProjectNames"
-                       :highlight-keys="typeOfProjectsHighlight" v-on:save="saveTypeOfProjects"></HighlightOption>
+  <div class="profileEdit">
+    <div class="left">
+      <ProfileHeader></ProfileHeader>
+      <div class="typeOfProjects">
+        <HighlightOption class="left" highlight-title="Type of projects" :options="typeOfProjectNames"
+                         :highlight-keys="typeOfProjectsHighlight" v-on:save="saveTypeOfProjects"></HighlightOption>
+        <HighlightOption highlight-title="Type of payment" :options="paymentOptionsNames"
+                         :highlight-keys="paymentOptionsHighlight" v-on:save="savePaymentOptions"></HighlightOption>
+      </div>
+      <PersonalData class="personalData"/>
     </div>
-    <div v-if="isTalent">
-      <h2>Cases Portfolio</h2>
-      <PortfolioProject v-for="project in user.portfolio" :key="project.title"
-                        :project="project"></PortfolioProject>
-    </div>
-    <div v-if="isSeeker">
-      <HighlightOption highlight-title="Contracting conditions" :options="contractingConditionsNames"
-                       :highlight-keys="contractingConditionsHighlight" v-on:save="saveContractingConditions">
-      </HighlightOption>
-    </div>
-    <PersonalData class="personalData"/>
-    <div v-if="isTalent">
-      <HighlightOption highlight-title="Skills" :options="skillOptions"
-                       :highlight-keys="selectedSkills" v-on:save="saveSkills">
-      </HighlightOption>
-    </div>
-    <div v-if="isSeeker">
-      <HighlightOption highlight-title="Business types" :options="businessTypeOptions"
-                       :highlight-keys="selectedBusinessTypes" v-on:save="saveBusinessTypes">
-      </HighlightOption>
+    <div class="right">
+      <div v-if="isTalent">
+        <h2>Cases Portfolio</h2>
+        <PortfolioProject v-for="project in user.portfolio" :key="project.title"
+                          :project="project"></PortfolioProject>
+      </div>
+      <div v-if="isSeeker">
+        <HighlightOption highlight-title="Contracting conditions" :options="contractingConditionsNames"
+                         :highlight-keys="contractingConditionsHighlight" v-on:save="saveContractingConditions">
+        </HighlightOption>
+      </div>
+      <div v-if="isTalent">
+        <HighlightOption highlight-title="Skills" :options="skillOptions"
+                         :highlight-keys="selectedSkills" v-on:save="saveSkills">
+        </HighlightOption>
+      </div>
+      <div v-if="isSeeker">
+        <HighlightOption highlight-title="Business types" :options="businessTypeOptions"
+                         :highlight-keys="selectedBusinessTypes" v-on:save="saveBusinessTypes">
+        </HighlightOption>
+      </div>
     </div>
   </div>
 </template>
@@ -150,5 +154,17 @@ export default class ProfileEdit extends Vue {
 
   .personalData {
     margin-top: 10px;
+  }
+
+  .typeOfProjects {
+    display: flex;
+    background: #FFFFFF;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.03);
+    padding: 20px;
+
+    .left {
+      border-right: 1px solid #EBEBEB;
+      margin-right: 1em;
+    }
   }
 </style>

@@ -2,7 +2,7 @@
   <div>
     <div class="container">
       <ProfileHeader :show-switch="false" class="profileHeader"></ProfileHeader>
-      <div v-if="isTalent">
+      <div v-if="isTalent" class="portfolios">
         <h2 class="portfolioHeader">Cases Portfolio</h2>
         <PortfolioProject v-for="project in user.portfolio" :key="project.title"
                           :project="project"></PortfolioProject>
@@ -102,5 +102,10 @@ export default class ProfileEdit extends Vue {
     font-size: 32px;
     color: #404040;
     margin-bottom: 16px;
+  }
+
+  .portfolios {
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.03);
+    padding: 20px;
   }
 </style>

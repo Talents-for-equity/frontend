@@ -48,6 +48,10 @@ export default class ProfileHeader extends Vue {
 </script>
 
 <style scoped>
+  .rating {
+    margin-top: 8px;
+  }
+
   .name {
     font-size: 42px;
   }

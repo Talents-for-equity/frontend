@@ -1,8 +1,10 @@
 <template>
   <div cass="highlightedOption">
-    <h4>{{highlightTitle}} <button v-if="showEditButton" v-on:click="editOptions">Edit</button></h4>
-    <div class="view" v-if="!edit">
-      <div v-for="type in options" :key="type.key"
+    <h4>{{highlightTitle}}
+      <button v-if="showEditButton" v-on:click="editOptions">Edit</button>
+    </h4>
+    <div class="optionsView" v-if="!edit">
+      <div class="highlightOption" v-for="type in options" :key="type.key"
            v-bind:class="{ highlight: type.selected }">
         {{type.name}}
       </div>
@@ -12,7 +14,8 @@
         <div v-for="type in options" :key="type.key">
           <input type="checkbox" :value="type.key" v-model="editKeys">{{type.name}}
         </div>
-        <button v-on:click="dismiss">Dismiss</button> <button v-on:click="save">Save</button>
+        <button v-on:click="dismiss">Dismiss</button>
+        <button v-on:click="save">Save</button>
       </div>
     </div>
   </div>
@@ -70,8 +73,7 @@ export default class HighlightOption extends Vue {
     return this.editKeys
   }
 
-  private setSelectedOptions (activeOptions: SelectOption[],
-    highlightKeys: number[]) {
+  private setSelectedOptions (activeOptions: SelectOption[], highlightKeys: number[]) {
     activeOptions.forEach(option => {
       option.selected = false
     })
@@ -82,8 +84,25 @@ export default class HighlightOption extends Vue {
 }
 </script>
 
-<style scoped>
-  .highlight {
-    color: blue;
+<style lang="scss" scoped>
+
+  button {
+    width: 100px !important;
+    height: 30px !important;
+    margin-right: 1em;
+  }
+
+  h4 {
+    font-size: 18px;
+  }
+
+  .highlightOption {
+    color: #595959;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+
+  .highlightOption.highlight {
+    color: #1667E0;
   }
 </style>
