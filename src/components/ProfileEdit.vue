@@ -167,4 +167,16 @@ export default class ProfileEdit extends Vue {
       margin-right: 1em;
     }
   }
+
+  .profileEdit {
+    display: flex;
+
+    .left {
+      padding-right: 1em;
+    }
+  }
+
+  .profileEdit>div {
+    flex: 1;
+  }
 </style>
