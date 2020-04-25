@@ -2,24 +2,72 @@ import { Action, Module, Mutation, VuexModule, getModule } from 'vuex-module-dec
 import store from '@/store'
 
 export enum Skills {
-  WebDesign = 'Web Design',
-  UXDesign = 'UX Design',
-  UIDesign = 'UI Design',
-  WebDevelopment = ' Web Development',
-  InformationArchitecture = 'Information Architecture',
-  BackEnd = 'Backend',
-  ContentMarketing = 'Content marketing',
-  FacebookAds = 'Facebook Ads',
-  PR = 'PR',
-  Consulting = 'Consulting',
-  Mentoring = 'Mentoring',
-  Development = 'Development'
+  WebDesign,
+  UXDesign,
+  UIDesign,
+  WebDevelopment,
+  InformationArchitecture,
+  BackEnd,
+  ContentMarketing,
+  FacebookAds,
+  PR,
+  Consulting,
+  Mentoring,
+  Development
+}
+
+export enum UserType {
+  Seeker,
+  Talent
+}
+
+export enum ProjectType {
+  Startups,
+  Personal,
+  LongTerm,
+  Volunteer
+}
+
+export enum PaymentType {
+  CreditCard,
+  Shares,
+  SWIFT,
+  Free
+}
+
+export interface Project {
+  title: string;
+  rating: number;
+  description: string;
 }
 
 export interface User {
+  userType: UserType;
   name: string;
   email: string;
+  description: string;
+  rating: number;
   skills: Skills[];
+  projectTypes: ProjectType[];
+  paymentTypes: PaymentType[];
+  portfolio: Project[];
+}
+
+const profiles: { [email: string]: User } = {}
+profiles['ruslan@designer.example'] = {
+  userType: UserType.Talent,
+  name: 'Ruslan Subbota',
+  email: 'ruslan@designer.example',
+  description: 'Lorem ipsum designer',
+  rating: 4.5,
+  skills: [Skills.UIDesign, Skills.UXDesign],
+  projectTypes: [ProjectType.LongTerm],
+  paymentTypes: [PaymentType.CreditCard],
+  portfolio: [{
+    title: 'Project title 1',
+    rating: 5,
+    description: 'Lorem ipsum description'
+  }]
 }
 
 @Module({
@@ -29,14 +77,15 @@ export interface User {
   dynamic: true
 })
 class UserModule extends VuexModule {
-  public user: User = { name: '', email: '', skills: [] }
+  public user: User = profiles['ruslan@designer.example']
 
   @Action({ commit: 'setUser' })
-  public async getUser (name: string) {
-    const userResult: User = {
-      name: name, email: name, skills: []
+  public async getUser (email: string) {
+    let user = profiles[email]
+    if (!user) {
+      user = profiles['ruslan@designer.example']
     }
-    return userResult
+    return user
   }
 
   @Mutation
