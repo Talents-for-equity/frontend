@@ -58,7 +58,7 @@ export enum PaymentType {
 export const paymentTypeNames: { [id: number]: string } = {}
 paymentTypeNames[PaymentType.CreditCard] = 'Credit card'
 paymentTypeNames[PaymentType.Shares] = 'Shares'
-paymentTypeNames[PaymentType.SWIFT] = 'Shares'
+paymentTypeNames[PaymentType.SWIFT] = 'SWIFT'
 paymentTypeNames[PaymentType.Free] = 'Free'
 
 export interface Project {
@@ -144,8 +144,12 @@ profiles['ruslan@business.example'] = {
   store,
   dynamic: true
 })
-class UserModule extends VuexModule {
+export class UserModule extends VuexModule {
   public user: User = profiles['ruslan@business.example']
+
+  public static cloneUser (user: User): User {
+    return JSON.parse(JSON.stringify(user))
+  }
 
   @Action({ commit: 'setUser' })
   public async getUser (email: string) {
@@ -159,6 +163,11 @@ class UserModule extends VuexModule {
   @Mutation
   public setUser (user: User) {
     this.user = user
+  }
+
+  @Action({ commit: 'setUser' })
+  public async saveUser (user: User) {
+    return user
   }
 }
 
