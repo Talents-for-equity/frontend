@@ -1,6 +1,8 @@
 <template>
    <div>
     Are you a seeker or talent¿?
+    <button>Seeker</button>
+    <button>Talent</button>
     </div>
 </template>
 

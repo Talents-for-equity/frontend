@@ -32,4 +32,13 @@ export default class Home extends Vue {
   text-align: center;
   color: #2c3e50;
 }
+
+button {
+  background: #1667E0;
+  border-radius: 7px;
+  border: none;
+  width: 235px;
+  height: 40px;
+  color: white;
+}
 </style>
