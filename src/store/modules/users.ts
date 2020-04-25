@@ -86,7 +86,8 @@ contractConditionNames[ContractCondition.Volunteer] = 'Volunteer'
 
 export interface User {
   userType: UserType;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   description: string;
   rating: number;
@@ -101,7 +102,8 @@ export interface User {
 const profiles: { [email: string]: User } = {}
 profiles['ruslan@designer.example'] = {
   userType: UserType.Talent,
-  name: 'Ruslan Subbota',
+  firstName: 'Ruslan',
+  lastName: 'Subbota',
   email: 'ruslan@designer.example',
   description: 'Lorem ipsum designer',
   seekerType: '',
@@ -126,7 +128,8 @@ profiles['ruslan@designer.example'] = {
 
 profiles['ruslan@business.example'] = {
   userType: UserType.Seeker,
-  name: 'Ruslan Subbota',
+  firstName: 'Ruslan',
+  lastName: 'Subbota',
   email: 'ruslan@business.example',
   description: 'Lorem ipsum business',
   seekerType: 'Business Angel',
@@ -167,6 +170,7 @@ export class UserModule extends VuexModule {
 
   @Action({ commit: 'setUser' })
   public async saveUser (user: User) {
+    profiles[user.email] = user
     return user
   }
 }
