@@ -5,43 +5,48 @@
     <div class="rating">Rating: {{user.rating}}</div>
     <div class="description">{{user.description}}</div>
     <div class="typeOfProjects">
-      <h4>Type of projects</h4>
-      <div v-for="projectType in projectTypeNames" :key="projectType.key"
-      v-bind:class="{ highlight: projectType.highlight }">
-        {{projectType.name}}
-      </div>
-    </div>
+      <HighlightOption highlight-title="Type of projects" :option-names="paymentOptionsNames"
+      :highlight-keys="paymentOptionsHighlight"></HighlightOption>
+      <HighlightOption highlight-title="Type of payment" :option-names="typeOfProjectNames"
+                       :highlight-keys="typeOfProjectsHighlight"></HighlightOption>
+   </div>
 
   </div>
 </template>
 
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator'
-import users, { projectTypeNames, skillNames, User } from '@/store/modules/users'
+import users, { paymentTypeNames, projectTypeNames, skillNames, User } from '@/store/modules/users'
+import HighlightOption from '@/components/profile/HighlightedOption.vue'
 
-@Component
+@Component({
+  components: {
+    HighlightOption
+  }
+})
 export default class Profile extends Vue {
   get user (): User {
     return users.user
   }
 
+  get typeOfProjectNames () {
+    return projectTypeNames
+  }
+
+  get typeOfProjectsHighlight () {
+    return this.user.projectTypes
+  }
+
+  get paymentOptionsNames () {
+    return paymentTypeNames
+  }
+
+  get paymentOptionsHighlight () {
+    return this.user.paymentTypes
+  }
+
   get skills (): string {
     return this.user.skills.map(skill => skillNames[skill]).join(', ')
-  }
-
-  get projectTypeNames (): { key: number; name: string; highlight: boolean }[] {
-    return Object.keys(projectTypeNames).map(key => {
-      const numberKey = parseInt(key)
-      return {
-        key: numberKey,
-        name: projectTypeNames[numberKey],
-        highlight: this.user.projectTypes.indexOf(numberKey) !== -1
-      }
-    })
-  }
-
-  higlightProjectType (key: number) {
-    return true
   }
 }
 </script>

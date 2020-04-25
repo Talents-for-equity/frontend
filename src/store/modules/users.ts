@@ -55,6 +55,12 @@ export enum PaymentType {
   Free
 }
 
+export const paymentTypeNames: { [id: number]: string } = {}
+paymentTypeNames[PaymentType.CreditCard] = 'Credit card'
+paymentTypeNames[PaymentType.Shares] = 'Shares'
+paymentTypeNames[PaymentType.SWIFT] = 'Shares'
+paymentTypeNames[PaymentType.Free] = 'Free'
+
 export interface Project {
   title: string;
   rating: number;
