@@ -1,7 +1,8 @@
 <template>
   <div>
     <h1>{{user.name}}</h1>
-    <h3>{{skills}}</h3>
+    <h3 v-if="isTalent">{{skills}}</h3>
+    <h3 v-if="isSeeker">{{user.seekerType}}</h3>
     <div class="rating">Rating: {{user.rating}}</div>
     <div class="description">{{user.description}}</div>
     <div class="typeOfProjects">
@@ -10,15 +11,28 @@
       <HighlightOption highlight-title="Type of payment" :option-names="typeOfProjectNames"
                        :highlight-keys="typeOfProjectsHighlight"></HighlightOption>
     </div>
-    <h2>Cases Portfolio</h2>
-    <PortfolioProject v-for="project in user.portfolio" :key="project.title"
-    :project="project"></PortfolioProject>
+    <div v-if="isTalent">
+      <h2>Cases Portfolio</h2>
+      <PortfolioProject v-for="project in user.portfolio" :key="project.title"
+                        :project="project"></PortfolioProject>
+    </div>
+    <div v-if="isSeeker">
+      <HighlightOption highlight-title="Contracting conditions" :option-names="contractingConditionsNames"
+                       :highlight-keys="contractingConditionsHighlight"></HighlightOption>
+    </div>
   </div>
 </template>
 
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator'
-import users, { paymentTypeNames, projectTypeNames, skillNames, User } from '@/store/modules/users'
+import users, {
+  contractConditionNames,
+  paymentTypeNames,
+  projectTypeNames,
+  skillNames,
+  User,
+  UserType
+} from '@/store/modules/users'
 import HighlightOption from '@/components/profile/HighlightedOption.vue'
 import PortfolioProject from '@/components/profile/PortfolioProject.vue'
 
@@ -49,8 +63,24 @@ export default class Profile extends Vue {
     return this.user.paymentTypes
   }
 
+  get contractingConditionsNames () {
+    return contractConditionNames
+  }
+
+  get contractingConditionsHighlight () {
+    return this.user.contractConditions
+  }
+
   get skills (): string {
     return this.user.skills.map(skill => skillNames[skill]).join(', ')
+  }
+
+  get isSeeker (): boolean {
+    return this.user.userType === UserType.Seeker
+  }
+
+  get isTalent (): boolean {
+    return this.user.userType === UserType.Talent
   }
 }
 </script>

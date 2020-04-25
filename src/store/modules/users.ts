@@ -69,7 +69,20 @@ export interface Project {
 
 export enum ContractCondition {
   PayPerProject,
+  MonthlyPayment,
+  TraineeForGreenCard,
+  PayLater,
+  SharePart,
+  Volunteer
 }
+
+export const contractConditionNames: { [id: number]: string } = {}
+contractConditionNames[ContractCondition.PayPerProject] = 'Pay per project'
+contractConditionNames[ContractCondition.MonthlyPayment] = 'Monthly payment'
+contractConditionNames[ContractCondition.TraineeForGreenCard] = 'Trainee for green card'
+contractConditionNames[ContractCondition.PayLater] = 'Pay later'
+contractConditionNames[ContractCondition.SharePart] = 'Share part'
+contractConditionNames[ContractCondition.Volunteer] = 'Volunteer'
 
 export interface User {
   userType: UserType;
@@ -77,10 +90,12 @@ export interface User {
   email: string;
   description: string;
   rating: number;
+  seekerType: string;
   skills: Skill[];
   projectTypes: ProjectType[];
   paymentTypes: PaymentType[];
   portfolio: Project[];
+  contractConditions: ContractCondition[];
 }
 
 const profiles: { [email: string]: User } = {}
@@ -89,21 +104,38 @@ profiles['ruslan@designer.example'] = {
   name: 'Ruslan Subbota',
   email: 'ruslan@designer.example',
   description: 'Lorem ipsum designer',
+  seekerType: '',
   rating: 4.5,
   skills: [Skill.UIDesign, Skill.UXDesign],
   projectTypes: [ProjectType.LongTerm],
   paymentTypes: [PaymentType.CreditCard],
-  portfolio: [{
-    title: 'Project title 1',
-    rating: 5,
-    description: 'Lorem ipsum description'
-  },
-  {
-    title: 'Project title 2',
-    rating: 4,
-    description: 'Lorem ipsum description'
-  }
-  ]
+  portfolio: [
+    {
+      title: 'Project title 1',
+      rating: 5,
+      description: 'Lorem ipsum description'
+    },
+    {
+      title: 'Project title 2',
+      rating: 4,
+      description: 'Lorem ipsum description'
+    }
+  ],
+  contractConditions: []
+}
+
+profiles['ruslan@business.example'] = {
+  userType: UserType.Seeker,
+  name: 'Ruslan Subbota',
+  email: 'ruslan@business.example',
+  description: 'Lorem ipsum business',
+  seekerType: 'Business Angel',
+  rating: 4.5,
+  skills: [Skill.UIDesign, Skill.UXDesign],
+  projectTypes: [ProjectType.Startups],
+  paymentTypes: [PaymentType.Shares],
+  portfolio: [],
+  contractConditions: [ContractCondition.SharePart]
 }
 
 @Module({
@@ -113,7 +145,7 @@ profiles['ruslan@designer.example'] = {
   dynamic: true
 })
 class UserModule extends VuexModule {
-  public user: User = profiles['ruslan@designer.example']
+  public user: User = profiles['ruslan@business.example']
 
   @Action({ commit: 'setUser' })
   public async getUser (email: string) {
