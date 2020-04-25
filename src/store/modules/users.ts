@@ -85,6 +85,15 @@ contractConditionNames[ContractCondition.PayLater] = 'Pay later'
 contractConditionNames[ContractCondition.SharePart] = 'Share part'
 contractConditionNames[ContractCondition.Volunteer] = 'Volunteer'
 
+export enum BusinessType {
+  BusinessAngel,
+  Investor
+}
+
+export const businessTypeNames: { [id: number]: string } = {}
+businessTypeNames[BusinessType.BusinessAngel] = 'Business Angel'
+businessTypeNames[BusinessType.Investor] = 'Investor'
+
 export interface SelectOption {
   key: number;
   name: string;
@@ -128,10 +137,11 @@ export interface User {
   paymentTypes: PaymentType[];
   portfolio: Project[];
   contractConditions: ContractCondition[];
+  businessTypes: BusinessType[];
 }
 
 const profiles: { [email: string]: User } = {}
-profiles['ruslan@designer.example'] = {
+profiles['ruslan@subbota.example'] = {
   userType: UserType.Talent,
   firstName: 'Ruslan',
   lastName: 'Subbota',
@@ -142,6 +152,7 @@ profiles['ruslan@designer.example'] = {
   skills: [Skill.UIDesign, Skill.UXDesign],
   projectTypes: [ProjectType.LongTerm],
   paymentTypes: [PaymentType.CreditCard],
+  businessTypes: [BusinessType.BusinessAngel],
   portfolio: [
     {
       title: 'Project title 1',
@@ -154,21 +165,6 @@ profiles['ruslan@designer.example'] = {
       description: 'Lorem ipsum description'
     }
   ],
-  contractConditions: []
-}
-
-profiles['ruslan@business.example'] = {
-  userType: UserType.Seeker,
-  firstName: 'Ruslan',
-  lastName: 'Subbota',
-  email: 'ruslan@business.example',
-  description: 'Lorem ipsum business',
-  seekerType: 'Business Angel',
-  rating: 4.5,
-  skills: [Skill.UIDesign, Skill.UXDesign],
-  projectTypes: [ProjectType.Startups],
-  paymentTypes: [PaymentType.Shares],
-  portfolio: [],
   contractConditions: [ContractCondition.SharePart]
 }
 
@@ -179,7 +175,7 @@ profiles['ruslan@business.example'] = {
   dynamic: true
 })
 export class UserModule extends VuexModule {
-  public user: User = profiles['ruslan@designer.example']
+  public user: User = profiles['ruslan@subbota.example']
 
   public static cloneUser (user: User): User {
     return JSON.parse(JSON.stringify(user))

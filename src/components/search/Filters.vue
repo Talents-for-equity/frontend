@@ -26,6 +26,6 @@ export default class Filters extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 
 </style>
