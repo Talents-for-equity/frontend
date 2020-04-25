@@ -84,22 +84,51 @@ contractConditionNames[ContractCondition.PayLater] = 'Pay later'
 contractConditionNames[ContractCondition.SharePart] = 'Share part'
 contractConditionNames[ContractCondition.Volunteer] = 'Volunteer'
 
+export enum BusinessType {
+  BusinessAngel,
+  Investor
+}
+
+export const businessTypeNames: { [id: number]: string } = {}
+businessTypeNames[BusinessType.BusinessAngel] = 'Business Angel'
+businessTypeNames[BusinessType.Investor] = 'Investor'
+
 export interface SelectOption {
   key: number;
   name: string;
   selected: boolean;
 }
 
-export function getContractConditionSelectOptions (): SelectOption[] {
-  const contractionConditionSelectOptions: SelectOption[] = []
-  for (const key in contractConditionNames) {
-    contractionConditionSelectOptions.push({
+function getOptionsFromArray (array: { [id: number]: string }) {
+  const result: SelectOption[] = []
+  for (const key in array) {
+    result.push({
       key: parseInt(key),
-      name: contractConditionNames[key],
+      name: array[key],
       selected: false
     })
   }
-  return contractionConditionSelectOptions
+  return result
+}
+
+export function getContractConditionSelectOptions (): SelectOption[] {
+  return getOptionsFromArray(contractConditionNames)
+}
+
+export function getPaymentTypeSelectOptions (): SelectOption[] {
+  return getOptionsFromArray(paymentTypeNames)
+}
+
+export function getProjectTypeSelectOptions (): SelectOption[] {
+  return getOptionsFromArray(projectTypeNames)
+}
+
+export function getSkillSelectOptions (): SelectOption[] {
+  return getOptionsFromArray(skillNames)
+}
+
+export function getBusinessTypeOptions (): SelectOption[] {
+  return getOptionsFromArray(businessTypeNames)
 }
 
 export interface User {
@@ -107,28 +136,34 @@ export interface User {
   firstName: string;
   lastName: string;
   email: string;
+  phone: string;
+  zip: string;
   description: string;
   rating: number;
-  seekerType: string;
   skills: Skill[];
+  vat: string;
   projectTypes: ProjectType[];
   paymentTypes: PaymentType[];
   portfolio: Project[];
   contractConditions: ContractCondition[];
+  businessTypes: BusinessType[];
 }
 
 const profiles: { [email: string]: User } = {}
-profiles['ruslan@designer.example'] = {
+profiles['ruslan@subbota.example'] = {
   userType: UserType.Talent,
   firstName: 'Ruslan',
   lastName: 'Subbota',
   email: 'ruslan@designer.example',
   description: 'Lorem ipsum designer',
-  seekerType: '',
+  phone: '1234',
+  zip: '5679',
   rating: 4.5,
+  vat: 'vat-123',
   skills: [Skill.UIDesign, Skill.UXDesign],
   projectTypes: [ProjectType.LongTerm],
   paymentTypes: [PaymentType.CreditCard],
+  businessTypes: [BusinessType.BusinessAngel],
   portfolio: [
     {
       title: 'Project title 1',
@@ -141,21 +176,6 @@ profiles['ruslan@designer.example'] = {
       description: 'Lorem ipsum description'
     }
   ],
-  contractConditions: []
-}
-
-profiles['ruslan@business.example'] = {
-  userType: UserType.Seeker,
-  firstName: 'Ruslan',
-  lastName: 'Subbota',
-  email: 'ruslan@business.example',
-  description: 'Lorem ipsum business',
-  seekerType: 'Business Angel',
-  rating: 4.5,
-  skills: [Skill.UIDesign, Skill.UXDesign],
-  projectTypes: [ProjectType.Startups],
-  paymentTypes: [PaymentType.Shares],
-  portfolio: [],
   contractConditions: [ContractCondition.SharePart]
 }
 
@@ -166,7 +186,7 @@ profiles['ruslan@business.example'] = {
   dynamic: true
 })
 export class UserModule extends VuexModule {
-  public user: User = profiles['']
+  public user: User = profiles['ruslan@subbota.example']
 
   public static cloneUser (user: User): User {
     return JSON.parse(JSON.stringify(user))
@@ -177,7 +197,7 @@ export class UserModule extends VuexModule {
   }
 
   get activeUser () {
-    return this.user
+    return UserModule.cloneUser(this.user)
   }
 
   @Action({ commit: 'setUser' })
@@ -186,14 +206,12 @@ export class UserModule extends VuexModule {
     if (!user) {
       user = profiles['ruslan@designer.example']
     }
-    console.log('get user', user)
     return user
   }
 
   @Mutation
   public setUser (user: User) {
     this.user = user
-    console.log('this.user', this.user)
   }
 
   @Action({ commit: 'setUser' })
