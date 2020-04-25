@@ -1,6 +1,5 @@
 <template>
   <div>
-    <button v-on:click="logout">Logout</button>
     <ProfileHeader></ProfileHeader>
     <div class="typeOfProjects">
       <HighlightOption highlight-title="Type of payment" :options="paymentOptionsNames"
@@ -61,7 +60,7 @@ import ProfileHeader from '@/components/profile/ProfileHeader.vue'
     HighlightOption
   }
 })
-export default class Profile extends Vue {
+export default class ProfileEdit extends Vue {
   get user (): User {
     return users.activeUser
   }
@@ -140,11 +139,6 @@ export default class Profile extends Vue {
     const clone = UserModule.cloneUser(this.user)
     clone.contractConditions = options
     await users.saveUser(clone)
-  }
-
-  async logout () {
-    await users.logout()
-    await router.push('/home')
   }
 }
 </script>

@@ -2,23 +2,25 @@
   <div>
     <h1>{{user.firstName}} {{user.lastName}}</h1>
     <h3>{{skills}}
-      <div class="onoffswitch">
+      <div class="onoffswitch" v-if="showSwitch">
         <input @change="switchProfile" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
                id="myonoffswitch" checked>
         <label class="onoffswitch-label" for="myonoffswitch"></label>
       </div>
-      <span class="profileSwitchLabel">Switch profile</span></h3>
+      <span class="profileSwitchLabel" v-if="showSwitch">Switch profile</span></h3>
     <div class="rating">Rating: {{user.rating}}</div>
     <div class="description">{{user.description}}</div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Prop, Vue } from 'vue-property-decorator'
 import users, { businessTypeNames, skillNames, User, UserType } from '@/store/modules/users'
 
 @Component
 export default class ProfileHeader extends Vue {
+  @Prop({ default: true }) showSwitch!: boolean
+
   get user (): User {
     return users.activeUser
   }

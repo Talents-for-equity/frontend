@@ -3,7 +3,7 @@ import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
 import RegistrationForm from '../views/Registration.vue'
 import Login from '../views/Login.vue'
-import ProfileView from '../views/ProfileView.vue'
+import Profile from '../views/Profile.vue'
 import Search from '../views/Search.vue'
 
 Vue.use(VueRouter)
@@ -35,8 +35,8 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/profile',
-    name: 'ProfileView',
-    component: ProfileView
+    name: 'Profile',
+    component: Profile
   },
   {
     path: '/login',
