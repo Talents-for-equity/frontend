@@ -1,6 +1,6 @@
 <template>
    <div>
-    Are you a seeker or talent¿?
+    <h2>Are you a</h2>
     <button>Seeker</button>
     <button>Talent</button>
     </div>
@@ -14,6 +14,12 @@ export default class IsSeekerTalent extends Vue {
 }
 </script>
 
-<style lang="scss">
-
+<style lang="scss" scoped>
+div{
+    display: block;
+    button{
+        margin: 1rem 0 ;
+        display: block;
+    }
+}
 </style>
