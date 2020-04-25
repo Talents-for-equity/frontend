@@ -2,14 +2,14 @@
   <div cass="highlightedOption">
     <h4>{{highlightTitle}} <button v-if="!edit" v-on:click="editOptions">Edit</button></h4>
     <div class="view" v-if="!edit">
-      <div v-for="type in getNames" :key="type.key"
-           v-bind:class="{ highlight: type.highlight }">
+      <div v-for="type in options" :key="type.key"
+           v-bind:class="{ highlight: type.selected }">
         {{type.name}}
       </div>
     </div>
     <div class="edit" v-if="edit">
       <div class="buttons">
-        <div v-for="type in getNames" :key="type.key">
+        <div v-for="type in options" :key="type.key">
           <input type="checkbox" :value="type.key" v-model="editKeys">{{type.name}}
         </div>
         <button v-on:click="dismiss">Dismiss</button> <button v-on:click="save">Save</button>
@@ -20,37 +20,38 @@
 
 <script lang="ts">
 import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
-
-export interface Options {
-  key: number;
-  name: string;
-}
+import { SelectOption } from '@/store/modules/users'
 
 @Component
 export default class HighlightOption extends Vue {
   @Prop({ default: 'title' }) highlightTitle!: string
-  @Prop() optionNames!: {[key: number]: string}
+  @Prop() options!: SelectOption[]
   @Prop() highlightKeys!: number[]
 
-  activeOptions = this.highlightKeys
-  editKeys = this.activeOptions
+  activeOptions!: SelectOption[]
+  editKeys: number[] = []
 
   edit = false
 
-  get getNames (): { key: number; name: string; highlight: boolean }[] {
-    return Object.keys(this.optionNames).map(key => {
-      const numberKey = parseInt(key)
-      return {
-        key: numberKey,
-        name: this.optionNames[numberKey],
-        highlight: this.activeOptions.indexOf(numberKey) !== -1
-      }
-    })
+  constructor () {
+    super()
+    this.activeOptions = this.options.slice()
+    this.setSelectedOptions(this.activeOptions, this.highlightKeys)
   }
 
   editOptions () {
+    this.editKeys = this.optionToSelectedKeys()
     this.edit = true
-    this.editKeys = this.activeOptions
+  }
+
+  private optionToSelectedKeys () {
+    const keys: number[] = []
+    this.activeOptions.forEach(option => {
+      if (option.selected) {
+        keys.push(option.key)
+      }
+    })
+    return keys
   }
 
   dismiss () {
@@ -59,9 +60,19 @@ export default class HighlightOption extends Vue {
 
   @Emit()
   save () {
-    this.activeOptions = this.editKeys
+    this.setSelectedOptions(this.activeOptions, this.editKeys)
     this.edit = false
-    return this.activeOptions
+    return this.editKeys
+  }
+
+  private setSelectedOptions (activeOptions: SelectOption[],
+    highlightKeys: number[]) {
+    activeOptions.forEach(option => {
+      option.selected = false
+    })
+    highlightKeys.forEach(key => {
+      activeOptions[key].selected = true
+    })
   }
 }
 </script>

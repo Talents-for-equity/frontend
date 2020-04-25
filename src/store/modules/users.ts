@@ -1,5 +1,6 @@
 import { Action, Module, Mutation, VuexModule, getModule } from 'vuex-module-decorators'
 import store from '@/store'
+import get = Reflect.get
 
 export enum Skill {
   WebDesign,
@@ -90,16 +91,28 @@ export interface SelectOption {
   selected: boolean;
 }
 
-export function getContractConditionSelectOptions (): SelectOption[] {
-  const contractionConditionSelectOptions: SelectOption[] = []
-  for (const key in contractConditionNames) {
-    contractionConditionSelectOptions.push({
+function getOptionsFromArray (array: { [id: number]: string }) {
+  const result: SelectOption[] = []
+  for (const key in array) {
+    result.push({
       key: parseInt(key),
-      name: contractConditionNames[key],
+      name: array[key],
       selected: false
     })
   }
-  return contractionConditionSelectOptions
+  return result
+}
+
+export function getContractConditionSelectOptions (): SelectOption[] {
+  return getOptionsFromArray(contractConditionNames)
+}
+
+export function getPaymentTypeSelectOptions (): SelectOption[] {
+  return getOptionsFromArray(paymentTypeNames)
+}
+
+export function getProjectTypeSelectOptions (): SelectOption[] {
+  return getOptionsFromArray(projectTypeNames)
 }
 
 export interface User {
@@ -166,7 +179,7 @@ profiles['ruslan@business.example'] = {
   dynamic: true
 })
 export class UserModule extends VuexModule {
-  public user: User = profiles['']
+  public user: User = profiles['ruslan@designer.example']
 
   public static cloneUser (user: User): User {
     return JSON.parse(JSON.stringify(user))

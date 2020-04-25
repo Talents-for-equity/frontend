@@ -7,9 +7,9 @@
     <div class="rating">Rating: {{user.rating}}</div>
     <div class="description">{{user.description}}</div>
     <div class="typeOfProjects">
-      <HighlightOption highlight-title="Type of payment" :option-names="paymentOptionsNames"
+      <HighlightOption highlight-title="Type of payment" :options="paymentOptionsNames"
                        :highlight-keys="paymentOptionsHighlight" v-on:save="savePaymentOptions"></HighlightOption>
-      <HighlightOption highlight-title="Type of projects" :option-names="typeOfProjectNames"
+      <HighlightOption highlight-title="Type of projects" :options="typeOfProjectNames"
                        :highlight-keys="typeOfProjectsHighlight" v-on:save="saveTypeOfProjects"></HighlightOption>
     </div>
     <div v-if="isTalent">
@@ -18,7 +18,7 @@
                         :project="project"></PortfolioProject>
     </div>
     <div v-if="isSeeker">
-      <HighlightOption highlight-title="Contracting conditions" :option-names="contractingConditionsNames"
+      <HighlightOption highlight-title="Contracting conditions" :options="contractingConditionsNames"
                        :highlight-keys="contractingConditionsHighlight" v-on:save="saveContractingConditions">
       </HighlightOption>
     </div>
@@ -29,7 +29,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import users, {
   ContractCondition,
-  contractConditionNames, PaymentType,
+  contractConditionNames, getContractConditionSelectOptions, getPaymentTypeSelectOptions, PaymentType,
   paymentTypeNames, ProjectType,
   projectTypeNames,
   skillNames,
@@ -52,7 +52,7 @@ export default class Profile extends Vue {
   }
 
   get typeOfProjectNames () {
-    return projectTypeNames
+    return getPaymentTypeSelectOptions()
   }
 
   get typeOfProjectsHighlight () {
@@ -60,7 +60,7 @@ export default class Profile extends Vue {
   }
 
   get paymentOptionsNames () {
-    return paymentTypeNames
+    return getPaymentTypeSelectOptions()
   }
 
   get paymentOptionsHighlight () {
@@ -68,7 +68,7 @@ export default class Profile extends Vue {
   }
 
   get contractingConditionsNames () {
-    return contractConditionNames
+    return getContractConditionSelectOptions()
   }
 
   get contractingConditionsHighlight () {
