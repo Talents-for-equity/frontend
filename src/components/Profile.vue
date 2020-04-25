@@ -1,17 +1,7 @@
 <template>
   <div>
     <button v-on:click="logout">Logout</button>
-    <h1>{{user.firstName}} {{user.lastName}}</h1>
-    <h3>{{skills}}
-      <div class="onoffswitch">
-        <input @change="switchProfile" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
-               id="myonoffswitch" checked>
-        <label class="onoffswitch-label" for="myonoffswitch"></label>
-      </div>
-      <span class="profileSwitchLabel">Switch profile</span></h3>
-    <h3 v-if="isSeeker">{{user.seekerType}}</h3>
-    <div class="rating">Rating: {{user.rating}}</div>
-    <div class="description">{{user.description}}</div>
+    <ProfileHeader></ProfileHeader>
     <div class="typeOfProjects">
       <HighlightOption highlight-title="Type of payment" :options="paymentOptionsNames"
                        :highlight-keys="paymentOptionsHighlight" v-on:save="savePaymentOptions"></HighlightOption>
@@ -28,18 +18,30 @@
                        :highlight-keys="contractingConditionsHighlight" v-on:save="saveContractingConditions">
       </HighlightOption>
     </div>
+    <PersonalData class="personalData"/>
+    <div v-if="isTalent">
+      <HighlightOption highlight-title="Skills" :options="skillOptions"
+                       :highlight-keys="selectedSkills" v-on:save="saveSkills">
+      </HighlightOption>
+    </div>
+    <div v-if="isSeeker">
+      <HighlightOption highlight-title="Business types" :options="businessTypeOptions"
+                       :highlight-keys="selectedBusinessTypes" v-on:save="saveBusinessTypes">
+      </HighlightOption>
+    </div>
   </div>
 </template>
 
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator'
 import users, {
+  BusinessType,
   businessTypeNames,
-  ContractCondition,
+  ContractCondition, getBusinessTypeOptions,
   getContractConditionSelectOptions,
-  getPaymentTypeSelectOptions,
+  getPaymentTypeSelectOptions, getSkillSelectOptions,
   PaymentType,
-  ProjectType,
+  ProjectType, Skill,
   skillNames,
   User,
   UserModule,
@@ -48,9 +50,13 @@ import users, {
 import HighlightOption from '@/components/profile/HighlightedOption.vue'
 import PortfolioProject from '@/components/profile/PortfolioProject.vue'
 import router from '@/router/index'
+import PersonalData from '@/components/profile/PersonalData.vue'
+import ProfileHeader from '@/components/profile/ProfileHeader.vue'
 
 @Component({
   components: {
+    ProfileHeader,
+    PersonalData,
     PortfolioProject,
     HighlightOption
   }
@@ -84,12 +90,30 @@ export default class Profile extends Vue {
     return this.user.contractConditions
   }
 
-  get skills (): string {
-    if (this.user.userType === UserType.Talent) {
-      return this.user.skills.map(skill => skillNames[skill]).join(', ')
-    }
-    return this.user.businessTypes.map(skill =>
-      businessTypeNames[skill]).join(', ')
+  get skillOptions () {
+    return getSkillSelectOptions()
+  }
+
+  get selectedSkills () {
+    return this.user.skills
+  }
+
+  async saveSkills (skills: Skill[]) {
+    this.user.skills = skills
+    await users.saveUser(this.user)
+  }
+
+  get businessTypeOptions () {
+    return getBusinessTypeOptions()
+  }
+
+  get selectedBusinessTypes () {
+    return this.user.businessTypes
+  }
+
+  async saveBusinessTypes (types: BusinessType[]) {
+    this.user.businessTypes = types
+    await users.saveUser(this.user)
   }
 
   get isSeeker (): boolean {
@@ -122,14 +146,6 @@ export default class Profile extends Vue {
     await users.logout()
     await router.push('/home')
   }
-
-  switchProfile () {
-    if (this.user.userType === UserType.Seeker) {
-      this.user.userType = UserType.Talent
-    } else {
-      this.user.userType = UserType.Seeker
-    }
-  }
 }
 </script>
 
@@ -138,62 +154,7 @@ export default class Profile extends Vue {
     color: blue;
   }
 
-  .profileSwitchLabel, .switch {
-    font-size: 10px;
-    font-weight: normal;
-  }
-
-  /* https://proto.io/freebies/onoff/ */
-  .onoffswitch {
-    position: relative;
-    width: 40px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    display: inline-block;
-  }
-
-  .onoffswitch-checkbox {
-    display: none;
-  }
-
-  .onoffswitch-label {
-    display: block;
-    overflow: hidden;
-    cursor: pointer;
-    height: 20px;
-    padding: 0;
-    line-height: 20px;
-    border: 2px solid #FFFFFF;
-    border-radius: 20px;
-    background-color: #9E9E9E;
-    transition: background-color 0.3s ease-in;
-  }
-
-  .onoffswitch-label:before {
-    content: "";
-    display: block;
-    width: 20px;
-    margin: 0px;
-    background: #FFFFFF;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 18px;
-    border: 2px solid #FFFFFF;
-    border-radius: 20px;
-    transition: all 0.3s ease-in 0s;
-  }
-
-  .onoffswitch-checkbox:checked + .onoffswitch-label {
-    background-color: #1667E0;
-  }
-
-  .onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
-    border-color: #1667E0;
-  }
-
-  .onoffswitch-checkbox:checked + .onoffswitch-label:before {
-    right: 0px;
+  .personalData {
+    margin-top: 10px;
   }
 </style>

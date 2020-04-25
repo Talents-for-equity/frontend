@@ -1,6 +1,5 @@
 import { Action, Module, Mutation, VuexModule, getModule } from 'vuex-module-decorators'
 import store from '@/store'
-import get = Reflect.get
 
 export enum Skill {
   WebDesign,
@@ -124,15 +123,25 @@ export function getProjectTypeSelectOptions (): SelectOption[] {
   return getOptionsFromArray(projectTypeNames)
 }
 
+export function getSkillSelectOptions (): SelectOption[] {
+  return getOptionsFromArray(skillNames)
+}
+
+export function getBusinessTypeOptions (): SelectOption[] {
+  return getOptionsFromArray(businessTypeNames)
+}
+
 export interface User {
   userType: UserType;
   firstName: string;
   lastName: string;
   email: string;
+  phone: string;
+  zip: string;
   description: string;
   rating: number;
-  seekerType: string;
   skills: Skill[];
+  vat: string;
   projectTypes: ProjectType[];
   paymentTypes: PaymentType[];
   portfolio: Project[];
@@ -147,8 +156,10 @@ profiles['ruslan@subbota.example'] = {
   lastName: 'Subbota',
   email: 'ruslan@designer.example',
   description: 'Lorem ipsum designer',
-  seekerType: '',
+  phone: '1234',
+  zip: '5679',
   rating: 4.5,
+  vat: 'vat-123',
   skills: [Skill.UIDesign, Skill.UXDesign],
   projectTypes: [ProjectType.LongTerm],
   paymentTypes: [PaymentType.CreditCard],
@@ -186,7 +197,7 @@ export class UserModule extends VuexModule {
   }
 
   get activeUser () {
-    return this.user
+    return UserModule.cloneUser(this.user)
   }
 
   @Action({ commit: 'setUser' })
@@ -195,14 +206,12 @@ export class UserModule extends VuexModule {
     if (!user) {
       user = profiles['ruslan@designer.example']
     }
-    console.log('get user', user)
     return user
   }
 
   @Mutation
   public setUser (user: User) {
     this.user = user
-    console.log('this.user', this.user)
   }
 
   @Action({ commit: 'setUser' })
