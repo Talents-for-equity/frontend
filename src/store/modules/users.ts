@@ -67,6 +67,10 @@ export interface Project {
   description: string;
 }
 
+export enum ContractCondition {
+  PayPerProject,
+}
+
 export interface User {
   userType: UserType;
   name: string;
@@ -93,7 +97,13 @@ profiles['ruslan@designer.example'] = {
     title: 'Project title 1',
     rating: 5,
     description: 'Lorem ipsum description'
-  }]
+  },
+  {
+    title: 'Project title 2',
+    rating: 4,
+    description: 'Lorem ipsum description'
+  }
+  ]
 }
 
 @Module({

@@ -6,11 +6,13 @@
     <div class="description">{{user.description}}</div>
     <div class="typeOfProjects">
       <HighlightOption highlight-title="Type of projects" :option-names="paymentOptionsNames"
-      :highlight-keys="paymentOptionsHighlight"></HighlightOption>
+                       :highlight-keys="paymentOptionsHighlight"></HighlightOption>
       <HighlightOption highlight-title="Type of payment" :option-names="typeOfProjectNames"
                        :highlight-keys="typeOfProjectsHighlight"></HighlightOption>
-   </div>
-
+    </div>
+    <h2>Cases Portfolio</h2>
+    <PortfolioProject v-for="project in user.portfolio" :key="project.title"
+    :project="project"></PortfolioProject>
   </div>
 </template>
 
@@ -18,9 +20,11 @@
 import { Component, Vue } from 'vue-property-decorator'
 import users, { paymentTypeNames, projectTypeNames, skillNames, User } from '@/store/modules/users'
 import HighlightOption from '@/components/profile/HighlightedOption.vue'
+import PortfolioProject from '@/components/profile/PortfolioProject.vue'
 
 @Component({
   components: {
+    PortfolioProject,
     HighlightOption
   }
 })
