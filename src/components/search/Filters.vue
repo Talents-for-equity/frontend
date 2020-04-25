@@ -1,18 +1,28 @@
 <template>
    <div>
-      Filter 123
+      <h4>{{title}}</h4>
+     <div v-for="option in options" :key="option.key">
+       <input type="checkbox" :value="option.key" v-model="selectedOptions"
+       @change="optionSelected">{{option.name}}
+     </div>
     </div>
 </template>
 
 <script lang='ts'>
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
 import { SelectOption } from '@/store/modules/users'
 
 @Component
 export default class Filters extends Vue {
-  // @Prop() options!: SelectOption[]
+  @Prop() title!: string
+  @Prop() options!: SelectOption[]
 
-  // selectedOptions = this.options
+  selectedOptions = []
+
+  @Emit('optionSelected')
+  optionSelected () {
+    return this.selectedOptions
+  }
 }
 </script>
 
