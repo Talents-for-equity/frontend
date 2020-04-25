@@ -1,15 +1,20 @@
 <template>
    <div id="nav">
       <router-link to="/">I need help </router-link>
-      <router-link to="#">My account</router-link>
+      <router-link v-if="isLoggedIn" to="/profile">My account</router-link>
+      <router-link v-if="!isLoggedIn" to="/login">My account</router-link>
     </div>
 </template>
 
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator'
+import users from '@/store/modules/users'
 
 @Component
 export default class NavBar extends Vue {
+  get isLoggedIn () {
+    return users.isLoggedIn
+  }
 }
 </script>
 

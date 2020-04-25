@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>{{user.name}}</h1>
+    <button v-on:click="logout">Logout</button>
+    <h1>{{user.firstName}} {{user.lastName}}</h1>
     <h3 v-if="isTalent">{{skills}}</h3>
     <h3 v-if="isSeeker">{{user.seekerType}}</h3>
     <div class="rating">Rating: {{user.rating}}</div>
@@ -37,6 +38,7 @@ import users, {
 } from '@/store/modules/users'
 import HighlightOption from '@/components/profile/HighlightedOption.vue'
 import PortfolioProject from '@/components/profile/PortfolioProject.vue'
+import router from '@/router/index'
 
 @Component({
   components: {
@@ -46,7 +48,7 @@ import PortfolioProject from '@/components/profile/PortfolioProject.vue'
 })
 export default class Profile extends Vue {
   get user (): User {
-    return users.user
+    return users.activeUser
   }
 
   get typeOfProjectNames () {
@@ -101,6 +103,11 @@ export default class Profile extends Vue {
     const clone = UserModule.cloneUser(this.user)
     clone.contractConditions = options
     await users.saveUser(clone)
+  }
+
+  async logout () {
+    await users.logout()
+    await router.push('/home')
   }
 }
 </script>

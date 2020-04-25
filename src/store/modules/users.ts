@@ -148,10 +148,18 @@ profiles['ruslan@business.example'] = {
   dynamic: true
 })
 export class UserModule extends VuexModule {
-  public user: User = profiles['ruslan@business.example']
+  public user: User = profiles['']
 
   public static cloneUser (user: User): User {
     return JSON.parse(JSON.stringify(user))
+  }
+
+  get isLoggedIn () {
+    return this.user !== undefined
+  }
+
+  get activeUser () {
+    return this.user
   }
 
   @Action({ commit: 'setUser' })
@@ -160,18 +168,25 @@ export class UserModule extends VuexModule {
     if (!user) {
       user = profiles['ruslan@designer.example']
     }
+    console.log('get user', user)
     return user
   }
 
   @Mutation
   public setUser (user: User) {
     this.user = user
+    console.log('this.user', this.user)
   }
 
   @Action({ commit: 'setUser' })
   public async saveUser (user: User) {
     profiles[user.email] = user
     return user
+  }
+
+  @Action({ commit: 'setUser' })
+  public async logout () {
+    return undefined
   }
 }
 

@@ -4,6 +4,7 @@
         <label>Email</label><input type="text" v-model="data.email" /> <br>
       <label>Password</label><input type="password" v-model="data.password" /> <br>
       <input type="button" v-on:click="login" value="Login">
+      <router-link to='/registration'>Register</router-link>
     </form>
   </div>
 </template>
