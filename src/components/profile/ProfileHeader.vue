@@ -1,23 +1,26 @@
 <template>
   <div>
-    <h1>{{user.firstName}} {{user.lastName}}</h1>
-    <h3>{{skills}}
+    <h1 class="name">{{user.firstName}} {{user.lastName}}</h1>
+    <h3 class="skills">{{skills}}
       <div class="onoffswitch" v-if="showSwitch">
         <input @change="switchProfile" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
                id="myonoffswitch" checked>
         <label class="onoffswitch-label" for="myonoffswitch"></label>
       </div>
       <span class="profileSwitchLabel" v-if="showSwitch">Switch profile</span></h3>
-    <div class="rating">Rating: {{user.rating}}</div>
+    <Rating :rating="user.rating" :show-rating-label="true"></Rating>
     <div class="description">{{user.description}}</div>
+    <div class="privacySettings" v-if="showSwitch">Privacy settings</div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import users, { businessTypeNames, skillNames, User, UserType } from '@/store/modules/users'
-
-@Component
+import Rating from '@/components/Rating.vue'
+@Component({
+  components: { Rating }
+})
 export default class ProfileHeader extends Vue {
   @Prop({ default: true }) showSwitch!: boolean
 
@@ -45,19 +48,45 @@ export default class ProfileHeader extends Vue {
 </script>
 
 <style scoped>
+  .name {
+    font-size: 42px;
+  }
+
+  .skills {
+    font-size: 24px;
+    margin-top: 8px;
+  }
+
+  .description {
+    font-size: 16px;
+    color: #404040;
+    margin-top: 6px;
+  }
+
+  .privacySettings {
+    color: #1667E0;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 9px;
+  }
+
   .profileSwitchLabel, .switch {
     font-size: 10px;
     font-weight: normal;
+    color: #B0B0B0;
+    margin-left: 14px;
   }
 
   /* https://proto.io/freebies/onoff/ */
   .onoffswitch {
     position: relative;
+    top: 5px;
     width: 40px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     display: inline-block;
+    margin-left: 28px;
   }
 
   .onoffswitch-checkbox {

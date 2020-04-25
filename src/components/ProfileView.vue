@@ -1,16 +1,18 @@
 <template>
   <div>
-    <ProfileHeader :show-switch="false"></ProfileHeader>
-    <div v-if="isTalent">
-      <h2>Cases Portfolio</h2>
-      <PortfolioProject v-for="project in user.portfolio" :key="project.title"
-                        :project="project"></PortfolioProject>
-    </div>
-    <div v-if="isSeeker">
-      <HighlightOption highlight-title="Contracting conditions" :options="contractingConditionsNames"
-                       :highlight-keys="contractingConditionsHighlight" v-on:save="saveContractingConditions"
-                       :read-only="true">
-      </HighlightOption>
+    <div class="container">
+      <ProfileHeader :show-switch="false" class="profileHeader"></ProfileHeader>
+      <div v-if="isTalent">
+        <h2 class="portfolioHeader">Cases Portfolio</h2>
+        <PortfolioProject v-for="project in user.portfolio" :key="project.title"
+                          :project="project"></PortfolioProject>
+      </div>
+      <div v-if="isSeeker">
+        <HighlightOption highlight-title="Contracting conditions" :options="contractingConditionsNames"
+                         :highlight-keys="contractingConditionsHighlight" v-on:save="saveContractingConditions"
+                         :read-only="true">
+        </HighlightOption>
+      </div>
     </div>
   </div>
 </template>
@@ -80,5 +82,25 @@ export default class ProfileEdit extends Vue {
 
   .personalData {
     margin-top: 10px;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .container>div {
+    flex: 1 320px;
+    width: 100%;
+  }
+
+  .profileHeader {
+    padding-right: 1em;
+  }
+
+  .portfolioHeader {
+    font-size: 32px;
+    color: #404040;
+    margin-bottom: 16px;
   }
 </style>

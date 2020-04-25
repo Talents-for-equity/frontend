@@ -1,8 +1,9 @@
 <template>
   <div>
-    <h4>{{project.title}}</h4>
+    <h4 class="title">{{project.title}}</h4>
     <div class="rating">Rating: {{project.rating}}</div>
-    <div>{{project.description}}</div>
+    <div class="description">{{project.description}}</div>
+    <div class="border"></div>
   </div>
 </template>
 
@@ -17,5 +18,19 @@ export default class PortfolioProject extends Vue {
 </script>
 
 <style scoped>
+  .title {
+    font-size: 20px;
+    color: #404040;
+  }
 
+  .description {
+    font-size: 16px;
+    color: #404040;
+  }
+
+  .border {
+    border: 1px solid #EBEBEB;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
 </style>
