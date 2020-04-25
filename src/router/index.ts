@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import RegistrationForm from '../views/Registration.vue'
 import Login from '../views/Login.vue'
 import ProfileView from '../views/ProfileView.vue'
+import Search from '../views/Search.vue'
 
 Vue.use(VueRouter)
 
@@ -26,6 +27,11 @@ const routes: Array<RouteConfig> = [
     path: '/registration',
     name: 'Registration',
     component: RegistrationForm
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search
   },
   {
     path: '/profile',

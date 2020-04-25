@@ -84,6 +84,24 @@ contractConditionNames[ContractCondition.PayLater] = 'Pay later'
 contractConditionNames[ContractCondition.SharePart] = 'Share part'
 contractConditionNames[ContractCondition.Volunteer] = 'Volunteer'
 
+export interface SelectOption {
+  key: number;
+  name: string;
+  selected: boolean;
+}
+
+export function getContractConditionSelectOptions (): SelectOption[] {
+  const contractionConditionSelectOptions: SelectOption[] = []
+  for (const key in contractConditionNames) {
+    contractionConditionSelectOptions.push({
+      key: parseInt(key),
+      name: contractConditionNames[key],
+      selected: false
+    })
+  }
+  return contractionConditionSelectOptions
+}
+
 export interface User {
   userType: UserType;
   firstName: string;
