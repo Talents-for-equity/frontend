@@ -1,5 +1,6 @@
 <template>
   <div>
+     <IsSeekerTalent/>
     <RegistrationForm v-on:register="register" v-if="!showSuccessful" />
     <RegistrationSuccessful v-if="showSuccessful" />
   </div>
@@ -9,11 +10,12 @@
 import { Component, Vue } from 'vue-property-decorator'
 import RegistrationForm from '@/components/RegistrationForm.vue'
 import RegistrationSuccessful from '@/components/RegistrationSuccessful.vue'
-
+import IsSeekerTalent from '@/components/IsSeekerTalent.vue'
 @Component({
   components: {
     RegistrationForm,
-    RegistrationSuccessful
+    RegistrationSuccessful,
+    IsSeekerTalent
   }
 })
 export default class Registration extends Vue {
