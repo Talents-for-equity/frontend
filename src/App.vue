@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <NavBar/>
-      <router-link to="/profile">Profile</router-link> |
-    <router-view/>
+    <div class="view">
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -30,7 +31,18 @@ export default class Home extends Vue {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  text-align: left;
   color: #2c3e50;
+    .view{
+      padding: 5rem;
+    }
+    button, .blue-button {
+    background: #1667E0;
+    border-radius: 7px;
+    border: none;
+    width: 235px;
+    height: 40px;
+    color: white;
+  }
 }
 </style>
