@@ -5,6 +5,7 @@
        <input type="checkbox" :value="option.key" v-model="selectedOptions"
        @change="optionSelected">{{option.name}}
      </div>
+      <input class="blue-button" type="button" value="Apply">
     </div>
 </template>
 
