@@ -43,7 +43,18 @@ export interface SeekerSearchResults {
   }
 })
 export default class SeekerSearch extends Vue {
-  SeekerResult: SeekerSearchResults = {
+  SeekerResult: SeekerSearchResults[] = [{
+    id: 661,
+    projectTitle: 'Project title 2',
+    description:
+      'Lorem ipsum dolor sitw amet, consectetur adipiscing elit. Nulla vitae faucibus et turpis tortor egestas. Suspendisse diam amet dictum non ac sed tortor, massa.',
+    rating: 4.5,
+    businessType: 'Startup',
+    businessName: 'Avalon ltd',
+    paymentCondition: 'Monthly payment',
+    paymentType: 'Credit card'
+  },
+  {
     id: 666,
     projectTitle: 'Project title 1',
     description:
@@ -53,7 +64,7 @@ export default class SeekerSearch extends Vue {
     businessName: 'Avalon ltd',
     paymentCondition: 'Monthly payment',
     paymentType: 'Credit card'
-  }
+  }]
 
   get contractConditions () {
     const value = getContractConditionSelectOptions()

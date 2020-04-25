@@ -1,16 +1,16 @@
 <template>
    <div>
      <h4>Project title</h4>
-     <div class="description">
+     <!-- <div class="description">
          <p>{{ resultData.projectTitle }}</p>
           <p>{{ resultData.rating }}</p>
          <p>{{ resultData.description }}</p>
-     </div>
-    <!-- <div v-for="data in resultData" :key="data.key">
-        <p>{{ data.id }}</p>
-        <p>{{ data.firstName }}</p>
-        <p>{{ data.lastName }}</p>
      </div> -->
+    <div v-for="data in resultData" :key="data.key">
+        <p>{{ data.id }}</p>
+        <p>{{ data.projectTitle }}</p>
+        <p>{{ data.description }}</p>
+     </div>
     </div>
 </template>
 
