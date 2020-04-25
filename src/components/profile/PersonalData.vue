@@ -39,8 +39,10 @@
         </div>
       </div>
     </div>
-    <button v-on:click="dismiss">Dismiss</button>
-    <button v-on:click="save">Save</button>
+    <div class="editButtons" v-if="activeEdit">
+      <button v-on:click="dismiss">Dismiss</button>
+      <button v-on:click="save">Save</button>
+    </div>
   </div>
 </template>
 
