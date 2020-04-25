@@ -8,7 +8,8 @@
     </div>
     <div v-if="isSeeker">
       <HighlightOption highlight-title="Contracting conditions" :options="contractingConditionsNames"
-                       :highlight-keys="contractingConditionsHighlight" v-on:save="saveContractingConditions">
+                       :highlight-keys="contractingConditionsHighlight" v-on:save="saveContractingConditions"
+                       :read-only="true">
       </HighlightOption>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div cass="highlightedOption">
-    <h4>{{highlightTitle}} <button v-if="!edit" v-on:click="editOptions">Edit</button></h4>
+    <h4>{{highlightTitle}} <button v-if="showEditButton" v-on:click="editOptions">Edit</button></h4>
     <div class="view" v-if="!edit">
       <div v-for="type in options" :key="type.key"
            v-bind:class="{ highlight: type.selected }">
@@ -27,6 +27,7 @@ export default class HighlightOption extends Vue {
   @Prop({ default: 'title' }) highlightTitle!: string
   @Prop() options!: SelectOption[]
   @Prop() highlightKeys!: number[]
+  @Prop({ default: false }) readOnly!: boolean
 
   activeOptions!: SelectOption[]
   editKeys: number[] = []
@@ -37,6 +38,10 @@ export default class HighlightOption extends Vue {
     super()
     this.activeOptions = this.options.slice()
     this.setSelectedOptions(this.activeOptions, this.highlightKeys)
+  }
+
+  get showEditButton () {
+    return !this.edit && !this.readOnly
   }
 
   editOptions () {
