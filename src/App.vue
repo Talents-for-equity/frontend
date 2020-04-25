@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <NavBar/>
+      <router-link to="/profile">Profile</router-link> |
     <router-view/>
   </div>
 </template>
