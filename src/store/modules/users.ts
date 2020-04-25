@@ -1,5 +1,5 @@
-import {Action, Module, Mutation, VuexModule, getModule} from "vuex-module-decorators";
-import store from "@/store";
+import { Action, Module, Mutation, VuexModule, getModule } from 'vuex-module-decorators'
+import store from '@/store'
 
 export interface User {
   name: string;
@@ -8,27 +8,25 @@ export interface User {
 
 @Module({
   namespaced: true,
-  name: "users",
+  name: 'users',
   store,
   dynamic: true
 })
 class UserModule extends VuexModule {
+  public user: User = { name: '', email: '' }
 
-  public user: User = {name: '', email: ''};
-
-  @Action({commit: 'setUser'})
-  public async getUser(name: string) {
+  @Action({ commit: 'setUser' })
+  public async getUser (name: string) {
     const userResult: User = {
       name: name, email: name
-    };
-    return userResult;
+    }
+    return userResult
   }
 
   @Mutation
-  public setUser(user: User) {
-    this.user = user;
+  public setUser (user: User) {
+    this.user = user
   }
 }
 
-export default getModule(UserModule);
-
+export default getModule(UserModule)
