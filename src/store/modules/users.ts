@@ -1,9 +1,25 @@
 import { Action, Module, Mutation, VuexModule, getModule } from 'vuex-module-decorators'
 import store from '@/store'
 
+export enum Skills {
+  WebDesign = 'Web Design',
+  UXDesign = 'UX Design',
+  UIDesign = 'UI Design',
+  WebDevelopment = ' Web Development',
+  InformationArchitecture = 'Information Architecture',
+  BackEnd = 'Backend',
+  ContentMarketing = 'Content marketing',
+  FacebookAds = 'Facebook Ads',
+  PR = 'PR',
+  Consulting = 'Consulting',
+  Mentoring = 'Mentoring',
+  Development = 'Development'
+}
+
 export interface User {
   name: string;
   email: string;
+  skills: Skills[];
 }
 
 @Module({
@@ -13,12 +29,12 @@ export interface User {
   dynamic: true
 })
 class UserModule extends VuexModule {
-  public user: User = { name: '', email: '' }
+  public user: User = { name: '', email: '', skills: [] }
 
   @Action({ commit: 'setUser' })
   public async getUser (name: string) {
     const userResult: User = {
-      name: name, email: name
+      name: name, email: name, skills: []
     }
     return userResult
   }
