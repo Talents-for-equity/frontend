@@ -29,6 +29,11 @@
       </div>
 
       <div>
+        <div class="label">Profession</div>
+        <input type="text" v-model="contactForm.profession">
+      </div>
+
+      <div>
         <div class="label">I am expert and talent</div>
         <input type="checkbox" v-model="contactForm.talent">
       </div>

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <LeafletMap/>
+    <div class="map">
+      <LeafletMap/>
+      </div>
   </div>
 </template>
 
@@ -18,5 +20,8 @@ export default class MapView extends Vue {
 </script>
 
 <style>
-
+.map{
+  padding: 2rem;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.03);
+}
 </style>

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Talents supporters EU hackathon</h1>
     <l-map style="height: 350px" :zoom="zoom" :center="center"
     v-if="showMap">
       <l-tile-layer :url="url"></l-tile-layer>
@@ -8,9 +9,19 @@
     </l-map>
     <div v-if="!showMap">
       <button @click="backToMap">Back to map</button>
-      <div v-for="person in people" v-bind:key="person.id">
-      {{person.profession}}
-      </div>
+      <h3>People who signed up, you can <router-link to="/preregistration">Signup Here</router-link></h3>
+      <table>
+        <tr>
+          <th>Profession</th>
+          <th>Is talent</th>
+          <th>Seeking talent</th>
+        </tr>
+        <tr v-for="person in people" v-bind:key="person.id">
+          <td>{{person.profession}}</td>
+          <td><input type="checkbox" disabled :checked="person.talent"></td>
+          <td><input type="checkbox" disabled :checked="person.seeker"></td>
+        </tr>
+      </table>
     </div>
   </div>
 </template>
@@ -116,4 +127,8 @@ export default class LeafletMap extends Vue {
 }
 </script>
 
-<style></style>
+<style lang="scss">
+  th, td {
+    padding-right: 1em;
+  }
+</style>
