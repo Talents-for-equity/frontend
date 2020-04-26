@@ -1,15 +1,16 @@
 <template>
   <div class="leafLetMap">
-    <h1 v-if="showMap">Talents and supporters EU hackaton</h1>
-    <l-map style="height: 350px" :zoom="zoom" :center="center"
-    v-if="showMap">
-      <l-tile-layer :url="url"></l-tile-layer>
-      <l-marker v-for="data in markers" v-bind:key="data.key"
-      :lat-lng="data.latLang" v-on:click="markerClicked(data.people)"></l-marker>
-    </l-map>
-    <div v-if="!showMap">
-      <button @click="backToMap">Back to map</button>
-      <h3>People who signed up, you can <router-link to="/preregistration">Signup Here</router-link></h3>
+    <h1>Talents and supporters EU hackaton</h1>
+      <l-map style="height: 350px" :zoom="zoom" :center="center">
+        <l-tile-layer :url="url"></l-tile-layer>
+        <l-marker v-for="data in markers" v-bind:key="data.key"
+                  :lat-lng="data.latLang" v-on:click="markerClicked(data.people)"></l-marker>
+      </l-map>
+    <md-dialog :md-active.sync="showDialog">
+      <md-dialog-title>
+        People who signed up, you can
+        <router-link to="/preregistration">Signup Here</router-link>
+      </md-dialog-title>
       <table>
         <tr>
           <th></th>
@@ -24,38 +25,10 @@
           <td><input type="checkbox" disabled :checked="person.seeker"></td>
         </tr>
       </table>
-    </div>
-    <md-dialog :md-active.sync="showDialog">
-      <md-dialog-title>Preferences</md-dialog-title>
-
-      <md-tabs md-dynamic-height>
-        <md-tab md-label="General">
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>
-        </md-tab>
-
-        <md-tab md-label="Activity">
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>
-        </md-tab>
-
-        <md-tab md-label="Account">
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dolorum dolores quae commodi impedit possimus qui, atque at voluptates cupiditate. Neque quae culpa suscipit praesentium inventore ducimus ipsa aut.</p>
-        </md-tab>
-      </md-tabs>
-
       <md-dialog-actions>
         <md-button class="md-primary" @click="showDialog = false">Close</md-button>
-        <md-button class="md-primary" @click="showDialog = false">Save</md-button>
       </md-dialog-actions>
     </md-dialog>
-
-    <md-button class="md-primary md-raised" @click="showDialog = true">Show Dialog</md-button>
   </div>
 </template>
 
@@ -98,11 +71,11 @@ interface MarkerResult {
   }
 })
 export default class LeafletMap extends Vue {
-  url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-  zoom = 3;
-  center = [47.41322, -1.219482];
-  bounds: number[] = [];
-  markerLatLng = [48.1719894, 11.603123292400097];
+  url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+  zoom = 3
+  center = [47.41322, -1.219482]
+  bounds: number[] = []
+  markerLatLng = [48.1719894, 11.603123292400097]
   markers: MarkerResult[] = []
   showMap = true
   people: People[] = []
@@ -135,7 +108,7 @@ export default class LeafletMap extends Vue {
 
   async getMarker () {
     const result = await Axios.get('https://tfe-reg.pandemy.xyz/mapping')
-    const markerObjects: {[key: string]: MarkerResult} = {}
+    const markerObjects: { [key: string]: MarkerResult } = {}
     result.data.forEach((values: any) => {
       const key = values.lat + ';' + values.lon
       let markerResult = markerObjects[key]
@@ -166,14 +139,16 @@ export default class LeafletMap extends Vue {
 </script>
 
 <style lang="scss">
-.leafLetMap{
-  text-align: center;
-  h1{
-    font-weight: bolder;
-    max-width: 450px;
-    margin: 0rem auto 2rem;
+  .leafLetMap {
+    text-align: center;
+
+    h1 {
+      font-weight: bolder;
+      max-width: 450px;
+      margin: 0rem auto 2rem;
+    }
   }
-}
+
   th, td {
     padding-right: 1em;
   }
