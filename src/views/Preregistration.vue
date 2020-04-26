@@ -47,6 +47,7 @@
         <input type="checkbox" v-model="contactForm.newsletter">
       </div>
       <button v-on:click="submitContact">Submit</button>
+      <GoogleLogin></GoogleLogin>
     </div>
   </div>
 </template>
@@ -54,6 +55,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import Axios from 'axios'
+import GoogleLogin from '@/components/GoogleLogin.vue'
 
 export interface ContactData {
   name: string;
@@ -72,8 +74,9 @@ interface SendInBlue {
 }
 
 declare const sendinblue: SendInBlue
-
-@Component
+@Component({
+  components: { GoogleLogin }
+})
 export default class Preregistration extends Vue {
   contactForm: ContactData = {
     name: '',
