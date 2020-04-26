@@ -13,6 +13,12 @@
 import { Component, Vue } from 'vue-property-decorator'
 import NavBar from '@/components/NavBar.vue'
 
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.min.css'
+import 'vue-material/dist/theme/default.css'
+
+Vue.use(VueMaterial)
+
 @Component({
   components: {
     NavBar
@@ -45,5 +51,9 @@ $primary: #E94E1B;
     color: white;
     cursor: pointer;
   }
+}
+
+.md-dialog {
+  z-index: 999;
 }
 </style>
