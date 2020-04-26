@@ -33,7 +33,6 @@ export default class Project extends Vue {
 
 <style lang="scss" scope>
 .seeker-results{
-   margin: 1rem 0;
    h4{
        font-size: 1.7rem;
    }

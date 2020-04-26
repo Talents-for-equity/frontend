@@ -7,7 +7,7 @@
     />
     <div class="result">
       <div class="search-bar">
-         <input type="text" placeholder="Search..">
+         <input type="text" placeholder="Search.." v-model="search">
          <input type="button" value="Search" class="blue-button">
       </div>
       <SeekerSearchResult  :result-data="SeekerResult" />
@@ -45,6 +45,7 @@ export interface SeekerSearchResults {
   }
 })
 export default class SeekerSearch extends Vue {
+  private search = '';
   SeekerResult: SeekerSearchResults[] = [{
     id: 661,
     projectTitle: 'Project title 1',
@@ -84,6 +85,12 @@ export default class SeekerSearch extends Vue {
     console.log('value', value)
     return value
   }
+
+  //  filterThrough () {
+  //   for (const i in this.SeekerResult) {
+  //       return 
+  //     }
+  //   }
 
   contractConditionSelected (selectedOptions: ContractCondition[]) {
     console.log('selected contract conditions', selectedOptions)
