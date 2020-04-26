@@ -26,8 +26,8 @@ export default class MapView extends Vue {
 
 <style lang="scss">
 .mapView{
-  width: 100%;
-  margin: 0;
+  margin: 0 auto;
+  width: 50%;
   padding: 0;
   .map{
     padding: 2rem;
