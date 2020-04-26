@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Contact</h1>
+    <h1>Preregistration</h1>
     <div v-if="showForm">
       <div>
         <div class="label">Name</div>
@@ -15,7 +15,7 @@
         <input type="text" v-model="contactForm.linkedin">
       </div>
       <div>
-        <div class="label">Comment</div>
+        <div class="label">About you</div>
         <textarea v-model="contactForm.comment"></textarea>
       </div>
       <button class="submitButton" v-on:click="submitContact">Submit</button>
@@ -37,8 +37,14 @@ export interface ContactData {
   comment: string;
 }
 
+interface SendInBlue {
+  track (eventName: string, props: any): void;
+}
+
+declare const sendinblue: SendInBlue
+
 @Component
-export default class Profile extends Vue {
+export default class Preregistration extends Vue {
   contactForm: ContactData = {
     name: '',
     email: '',
@@ -49,6 +55,7 @@ export default class Profile extends Vue {
   showForm = true
 
   submitContact () {
+    sendinblue.track('preregistration', this.contactForm)
     this.showForm = false
   }
 }

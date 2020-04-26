@@ -5,7 +5,7 @@ import RegistrationForm from '../views/Registration.vue'
 import Login from '../views/Login.vue'
 import Profile from '../views/Profile.vue'
 import Search from '../views/Search.vue'
-import Contact from '../views/Contact.vue'
+import Preregistration from '../views/Preregistration.vue'
 
 Vue.use(VueRouter)
 
@@ -45,9 +45,9 @@ const routes: Array<RouteConfig> = [
     component: Login
   },
   {
-    path: '/contact',
-    name: 'Contact',
-    component: Contact
+    path: '/preregistration',
+    name: 'Preregistration',
+    component: Preregistration
   }
 ]
 
