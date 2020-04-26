@@ -23,21 +23,21 @@ export default class Home extends Vue {
 </script>
 
 <style lang="scss">
+$normal:'Montserrat', sans-serif;
+$primary: #E94E1B;
+
 *{
   margin: 0;
   padding: 0;
 }
 #app {
-  font-family: Montserrat, Avenir, Helvetica, Arial, sans-serif;
+  font-family:$normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
   color: #2c3e50;
-    .view{
-      padding: 5rem;
-    }
     button, .blue-button {
-    background: #1667E0;
+    background: $primary;
     border-radius: 7px;
     border: none;
     width: 235px;

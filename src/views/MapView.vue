@@ -26,20 +26,25 @@ export default class MapView extends Vue {
 
 <style lang="scss">
 .mapView{
-  margin: 0 auto;
-  width: 50%;
-  padding: 0;
+  margin: 2rem auto;
+  min-height: 1100px;
+  max-width: 900px;
+  position:relative;
   .map{
-    padding: 2rem;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.03);
+    padding: 7rem 4.5rem;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 1rem;
   }
 }
 
 footer{
   text-align: center;
   font-weight: bold;
+  position: absolute;
+  bottom: 0;
+  max-width: 100%;
   p{
-    padding: 2rem 0;
+    padding: 1rem 0;
   }
   img{
     width: 100%;

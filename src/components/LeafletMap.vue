@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1 v-if="showMap">Talents supporters EU hackathon</h1>
+  <div class="leafLetMap">
+    <h1 v-if="showMap">Talents and supporters EU hackaton</h1>
     <l-map style="height: 350px" :zoom="zoom" :center="center"
     v-if="showMap">
       <l-tile-layer :url="url"></l-tile-layer>
@@ -132,7 +132,14 @@ export default class LeafletMap extends Vue {
 </script>
 
 <style lang="scss">
-
+.leafLetMap{
+  text-align: center;
+  h1{
+    font-weight: bolder;
+    max-width: 450px;
+    margin: 0rem auto 2rem;
+  }
+}
   th, td {
     padding-right: 1em;
   }
