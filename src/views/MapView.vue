@@ -5,11 +5,6 @@
         to all supporters, creators and attendees of this hackathon.
         We created this map and our solution for all of you to show your impact on Europe
         and to stay connected with all talents.</h3>
-      <h3 class="thankYou">Thank you for "liking":
-        <a href="https://devpost.com/software/talents-for-equity-w5hnuc" target="_blank"
-           rel="noopener noreferrer">
-          https://devpost.com/software/talents-for-equity-w5hnuc
-        </a></h3>
       <div class="signup"><button @click="signUp">Sign Up</button></div>
     </div>
     <div class="map">
@@ -50,13 +45,6 @@ export default class MapView extends Vue {
       padding: 2rem 4.5rem;
       box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
       border-radius: 1rem;
-    }
-  }
-
-  .thankYou {
-    margin-top: 1em;
-    a {
-      color: red;
     }
   }
 
