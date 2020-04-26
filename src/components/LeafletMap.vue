@@ -90,7 +90,7 @@ export default class LeafletMap extends Vue {
     this.bounds = bounds
   }
 
-  markerClicked (data: People) {
+  markerClicked (data: People[]) {
     console.log('marker clicked', data)
     this.showMap = false
     this.people = data
@@ -99,7 +99,7 @@ export default class LeafletMap extends Vue {
   async getMarker () {
     const result = await Axios.get('https://tfe-reg.pandemy.xyz/mapping')
     const markerObjects: {[key: string]: MarkerResult} = {}
-    result.data.forEach(values => {
+    result.data.forEach((values: any) => {
       const key = values.lat + ';' + values.lon
       let markerResult = markerObjects[key]
       if (!markerResult) {
@@ -128,6 +128,7 @@ export default class LeafletMap extends Vue {
 </script>
 
 <style lang="scss">
+
   th, td {
     padding-right: 1em;
   }
