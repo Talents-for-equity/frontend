@@ -1,6 +1,7 @@
 <template>
   <div class="preRegistration">
     <div v-if="showForm" class="form">
+    <div>
 
       <div>
         <div class="label">Username</div>
@@ -62,11 +63,13 @@
       </label>
     </div>
   </div>
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import Axios from 'axios'
+import router from '@/router/index'
 
 export interface ContactData {
   name: string;
@@ -106,6 +109,7 @@ export default class Preregistration extends Vue {
     // sendinblue.track('preregistration', this.contactForm)
     this.showForm = false
     await Axios.post('https://tfe-reg.pandemy.xyz/mapping', this.contactForm)
+    router.push('/')
   }
 }
 </script>
@@ -114,21 +118,24 @@ export default class Preregistration extends Vue {
 .preRegistration{
   padding-top: 3rem;
   width: 80%;
+  max-width: 1500px;
   margin: auto;
   font-size: 1.2rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: left;
-  .checkboxes, .form{
-    padding: 4rem;
+  .checkboxes{
+    padding: 1rem 0;
   }
-  .checkboxWrapper{
+  .form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+   .checkboxWrapper{
     display: flex;
     padding: .5rem;
     font-weight: 500;
     input[type=checkbox]{
       margin-right: 1rem;
     }
+  }
   }
 }
   .submitButton {
