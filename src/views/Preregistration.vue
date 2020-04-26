@@ -2,39 +2,64 @@
   <div>
     <h1>Preregistration</h1>
     <div v-if="showForm">
+
       <div>
         <div class="label">Name</div>
         <input type="text" v-model="contactForm.name">
       </div>
+
       <div>
         <div class="label">Email</div>
         <input type="text" v-model="contactForm.email">
       </div>
+
+      <div>
+        <div class="label">Country</div>
+        <input type="text" v-model="contactForm.country">
+      </div>
+
+      <div>
+        <div class="label">Zip Code</div>
+        <input type="text" v-model="contactForm.zip">
+      </div>
+
       <div>
         <div class="label">LinkedIn</div>
         <input type="text" v-model="contactForm.linkedin">
       </div>
-      <div>
-        <div class="label">About you</div>
-        <textarea v-model="contactForm.comment"></textarea>
-      </div>
-      <button class="submitButton" v-on:click="submitContact">Submit</button>
-    </div>
 
-    <div v-if="!showForm" class="contactDataSent">
-      <h3>Contact data sent</h3>
+      <div>
+        <div class="label">I am expert and talent</div>
+        <input type="checkbox" v-model="contactForm.talent">
+      </div>
+
+       <div>
+        <div class="label">I am interested to find talents and experts for my business</div>
+        <input type="checkbox" v-model="contactForm.seeker">
+      </div>
+      <div>
+        <div class="label">Newsletter. Just facts, no spam, no ads.</div>
+        <input type="checkbox" v-model="contactForm.newsletter">
+      </div>
+      <button v-on:click="submitContact">Submit</button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import Axios from 'axios'
 
 export interface ContactData {
   name: string;
   email: string;
   linkedin: string;
-  comment: string;
+  country: string;
+  zip: string;
+  profession: string;
+  talent: boolean;
+  seeker: boolean;
+  newsletter: boolean;
 }
 
 interface SendInBlue {
@@ -49,14 +74,20 @@ export default class Preregistration extends Vue {
     name: '',
     email: '',
     linkedin: '',
-    comment: ''
+    country: '',
+    zip: '',
+    profession: '',
+    talent: false,
+    seeker: false,
+    newsletter: false
   }
 
   showForm = true
 
-  submitContact () {
-    sendinblue.track('preregistration', this.contactForm)
+  async submitContact () {
+    // sendinblue.track('preregistration', this.contactForm)
     this.showForm = false
+    await Axios.post('https://tfe.pandemy.xyz:8080/mapping', this.contactForm)
   }
 }
 </script>

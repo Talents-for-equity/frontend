@@ -79,4 +79,3 @@ export default class SeekerSearch extends Vue {
 </script>
 
 <style lang="scss">
-</style>
