@@ -4,15 +4,15 @@
       <h2>Take a look at how many people joined the hackathon</h2>
       <h3>Our team wanted to say thank you with <span class="heart">❤</span>️
         to all supporters, creators and attendees of this hackathon.</h3>
+      <h3 class="thankYou">Say thank you to us and pay us with a "like" here:
+        <a href="https://devpost.com/software/talents-for-equity-w5hnuc" target="_blank"
+           rel="noopener noreferrer">Link</a></h3>
       <h3>To be a part of it, go to the sign up
         <button @click="signUp">Sign Up</button>
       </h3>
     </div>
     <div class="map">
       <LeafletMap/>
-      <h3 class="thankYou">Say thank you to us and pay us with a "like" here:
-        <a href="https://devpost.com/software/talents-for-equity-w5hnuc" target="_blank"
-           rel="noopener noreferrer">Link</a></h3>
     </div>
     <footer>
       <a href="https://devpost.com/software/talents-for-equity-w5hnuc" target="_blank"><img src="@/assets/Banner.jpg"
@@ -53,7 +53,6 @@ export default class MapView extends Vue {
   }
 
   .thankYou {
-    margin-top: 1em;
 
     a {
       color: red;
