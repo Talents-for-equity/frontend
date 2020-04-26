@@ -9,7 +9,7 @@
 
       <div>
         <div class="label">Email</div>
-        <input type="text" v-model="contactForm.email">
+        <input type="email" v-model="contactForm.email">
       </div>
 
       <div>
@@ -30,6 +30,9 @@
       <div>
         <div class="label">Profession</div>
         <input type="text" v-model="contactForm.profession" placeholder=" e.g. Developer">
+      </div>
+      <div v-if="emailError" class="error">
+        Email address is invalid
       </div>
       <button v-on:click="submitContact">Submit</button>
     </div>
@@ -101,11 +104,20 @@ export default class Preregistration extends Vue {
   }
 
   showForm = true
+  emailError = false
 
   async submitContact () {
-    // sendinblue.track('preregistration', this.contactForm)
+    if (this.isEmailInvalid()) {
+      return
+    }
     this.showForm = false
     await Axios.post('https://tfe-reg.pandemy.xyz/mapping', this.contactForm)
+  }
+
+  private isEmailInvalid () {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    this.emailError = !re.test(this.contactForm.email)
+    return this.emailError
   }
 }
 </script>
@@ -135,7 +147,7 @@ export default class Preregistration extends Vue {
     margin-top: 1em;
   }
 
-  input[type=text]{
+  input[type=text], input[type=email]{
     border: 1px solid #C4C4C4;
     box-sizing: border-box;
     border-radius: 7px;
@@ -163,5 +175,10 @@ export default class Preregistration extends Vue {
     h3 {
       margin-top: 3em;
     }
+  }
+
+  .error {
+    color: red;
+    margin-bottom: 5px;
   }
 </style>
