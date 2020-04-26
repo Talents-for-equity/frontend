@@ -27,13 +27,27 @@ export interface MessagesResults {
   }
 })
 export default class Messages extends Vue {
-singleMessage: MessagesResults = {
+singleMessage: MessagesResults[] = [{
   id: 123,
   firstName: 'John',
   lastName: 'Doe',
   rating: 4.5,
   lastText: 'Some ideas and insights...'
-};
+},
+{
+  id: 123,
+  firstName: 'John',
+  lastName: 'Doe',
+  rating: 4.5,
+  lastText: 'Some ideas and insights...'
+},
+{
+  id: 123,
+  firstName: 'John',
+  lastName: 'Doe',
+  rating: 4.5,
+  lastText: 'Some ideas and insights...'
+}];
 }
 </script>
 
