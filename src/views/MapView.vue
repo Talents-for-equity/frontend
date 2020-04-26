@@ -5,7 +5,7 @@
       </div>
       <footer>
         <p>Our Team wanted to say thank you with :hearts: to all Supporter, Creator and Attendees of this Hackathon.</p>
-        <img src="@/assets/Banner.jpg" alt="" srcset="">
+        <a href="https://devpost.com/software/talents-for-equity-w5hnuc" target="_blank"><img src="@/assets/Banner.jpg" alt="" srcset=""></a>
         <p>Say thank you to us and pay us with a "like" here: <a href="https://devpost.com/software/talents-for-equity-w5hnuc" target="_blank" rel="noopener noreferrer">Link</a></p>
       </footer>
   </div>
