@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Talents supporters EU hackathon</h1>
+    <h1 v-if="showMap">Talents supporters EU hackathon</h1>
     <l-map style="height: 350px" :zoom="zoom" :center="center"
     v-if="showMap">
       <l-tile-layer :url="url"></l-tile-layer>
@@ -12,11 +12,13 @@
       <h3>People who signed up, you can <router-link to="/preregistration">Signup Here</router-link></h3>
       <table>
         <tr>
+          <th></th>
           <th>Profession</th>
           <th>Is talent</th>
           <th>Seeking talent</th>
         </tr>
         <tr v-for="person in people" v-bind:key="person.id">
+          <td><img :src="person.avatar"></td>
           <td>{{person.profession}}</td>
           <td><input type="checkbox" disabled :checked="person.talent"></td>
           <td><input type="checkbox" disabled :checked="person.seeker"></td>
@@ -44,6 +46,7 @@ L.Icon.Default.mergeOptions({
 
 interface People {
   id: string;
+  avatar: string;
   profession: string;
   talent: boolean;
   seeker: boolean;
@@ -112,6 +115,7 @@ export default class LeafletMap extends Vue {
       }
       markerResult.people.push({
         id: uuidv4(),
+        avatar: values.avatar,
         profession: values.profession,
         talent: values.talent === 'true',
         seeker: values.seeker === 'true',
