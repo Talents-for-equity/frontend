@@ -35,6 +35,7 @@ $primary: #E94E1B;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
+  font-weight: 500;
   color: #2c3e50;
     button, .blue-button {
     background: $primary;
@@ -42,7 +43,11 @@ $primary: #E94E1B;
     border: none;
     width: 235px;
     height: 40px;
+    text-transform: uppercase;
+    font-family:$normal;
+    font-weight: bolder;
     color: white;
+    font-size: 1rem;
     cursor: pointer;
   }
 }

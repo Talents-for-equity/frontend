@@ -1,10 +1,9 @@
 <template>
-  <div>
-    <h1>Preregistration</h1>
+  <div class="preRegistration">
     <div v-if="showForm">
 
       <div>
-        <div class="label">Name</div>
+        <div class="label">Username</div>
         <input type="text" v-model="contactForm.name">
       </div>
 
@@ -98,6 +97,10 @@ export default class Preregistration extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.preRegistration{
+  padding: 3rem 7.5rem;
+  font-size: 1rem;
+}
   .submitButton {
     margin-top: 1em;
   }
