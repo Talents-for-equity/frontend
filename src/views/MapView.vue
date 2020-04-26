@@ -1,15 +1,16 @@
 <template>
   <div class="mapView">
     <div class="introduction">
-      <h2>Take a look at how many people joined the hackathon</h2>
       <h3>Our team wanted to say thank you with <span class="heart">❤</span>️
-        to all supporters, creators and attendees of this hackathon.</h3>
-      <h3 class="thankYou">Say thank you to us and pay us with a "like" here:
+        to all supporters, creators and attendees of this hackathon.
+        We created this map and our solution for all of you to show your impact on Europe
+        and to stay connected with all talents.</h3>
+      <h3 class="thankYou">Thank you for "liking":
         <a href="https://devpost.com/software/talents-for-equity-w5hnuc" target="_blank"
-           rel="noopener noreferrer">Link</a></h3>
-      <h3>To be a part of it, go to the sign up
-        <button @click="signUp">Sign Up</button>
-      </h3>
+           rel="noopener noreferrer">
+          https://devpost.com/software/talents-for-equity-w5hnuc
+        </a></h3>
+      <div class="signup"><button @click="signUp">Sign Up</button></div>
     </div>
     <div class="map">
       <LeafletMap/>
@@ -53,7 +54,7 @@ export default class MapView extends Vue {
   }
 
   .thankYou {
-
+    margin-top: 1em;
     a {
       color: red;
     }
@@ -81,5 +82,10 @@ export default class MapView extends Vue {
     img {
       width: 100%;
     }
+  }
+
+  .signup {
+    margin-top: 1em;
+    text-align: center;
   }
 </style>

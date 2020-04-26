@@ -1,8 +1,8 @@
 <template>
    <div id="nav">
-      <router-link to="/">I need help </router-link>
-      <router-link v-if="isLoggedIn" to="/profile">My account</router-link>
-      <router-link v-if="!isLoggedIn" to="/login">My account</router-link>
+<!--      <router-link to="/">I need help </router-link>-->
+<!--      <router-link v-if="isLoggedIn" to="/profile">My account</router-link>-->
+<!--      <router-link v-if="!isLoggedIn" to="/login">My account</router-link>-->
     </div>
 </template>
 
