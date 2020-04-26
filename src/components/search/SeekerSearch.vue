@@ -17,12 +17,14 @@
     />
     <div class="result">
       <div class="search-bar">
-         <input type="text" placeholder="Search.." v-model="search">
-         <input type="button" value="Search" class="blue-button">
+        <input type="text" placeholder="Search.." v-model="searchFilter" />
+        <input type="button" value="Search" class="blue-button" />
       </div>
-      <SeekerSearchResult  :result-data="SeekerResult" />
+
+      <!-- <SeekerSearchResult  :result-data="SeekerResult" /> -->
+      <SeekerSearchResult :result-data="filterThrough" />
     </div>
-      <Messages />
+    <Messages />
   </div>
 </template>
 
@@ -30,7 +32,11 @@
 import { Component, Vue } from 'vue-property-decorator'
 import {
   ContractCondition,
-  getContractConditionSelectOptions, getPaymentTypeSelectOptions, getProjectTypeSelectOptions, PaymentType, ProjectType
+  getContractConditionSelectOptions,
+  getPaymentTypeSelectOptions,
+  getProjectTypeSelectOptions,
+  PaymentType,
+  ProjectType
 } from '@/store/modules/users'
 import Filters from '@/components/search/Filters.vue'
 import SeekerSearchResult from '@/components/search/SeekerSearchResult.vue'
@@ -55,40 +61,42 @@ export interface SeekerSearchResults {
   }
 })
 export default class SeekerSearch extends Vue {
-  private search = '';
-  SeekerResult: SeekerSearchResults[] = [{
-    id: 661,
-    projectTitle: 'Project title 1',
-    description:
-      'Lorem ipsum dolor sitw amet, consectetur adipiscing elit. Nulla vitae faucibus et turpis tortor egestas. Suspendisse diam amet dictum non ac sed tortor, massa.',
-    rating: 4,
-    businessType: 'Startup',
-    businessName: 'Avalon ltd',
-    paymentCondition: 'Monthly payment',
-    paymentType: 'Credit card'
-  },
-  {
-    id: 662,
-    projectTitle: 'Project title 2',
-    description:
-      'Lorem ipsum doelor sitw amet, consectetur adipiscing elit. Nulla vitae faucibus et turpis tortor egestas. Suspendisse diam amet dictum non ac sed tortor, massa.',
-    rating: 4,
-    businessType: 'Startup',
-    businessName: 'Avalon ltd',
-    paymentCondition: 'Monthly payment',
-    paymentType: 'Credit card'
-  },
-  {
-    id: 666,
-    projectTitle: 'Project title 3',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae faucibus et turpis tortor egestas. Suspendisse diam amet dictum non ac sed tortor, massa.',
-    rating: 3,
-    businessType: 'Startup',
-    businessName: 'Avalon ltd',
-    paymentCondition: 'Monthly payment',
-    paymentType: 'Credit card'
-  }];
+  private searchFilter = '';
+  SeekerResult: SeekerSearchResults[] = [
+    {
+      id: 661,
+      projectTitle: 'Project title 1',
+      description:
+        'Lorem ipsum dolor sitw amet, consectetur adipiscing elit. Nulla vitae faucibus et turpis tortor egestas. Suspendisse diam amet dictum non ac sed tortor, massa.',
+      rating: 4,
+      businessType: 'Startup',
+      businessName: 'Avalon ltd',
+      paymentCondition: 'Monthly payment',
+      paymentType: 'Credit card'
+    },
+    {
+      id: 662,
+      projectTitle: 'Project title 2',
+      description:
+        'Lorem ipsum doelor sitw amet, consectetur adipiscing elit. Nulla vitae faucibus et turpis tortor egestas. Suspendisse diam amet dictum non ac sed tortor, massa.',
+      rating: 4,
+      businessType: 'Startup',
+      businessName: 'Avalon ltd',
+      paymentCondition: 'Monthly payment',
+      paymentType: 'Credit card'
+    },
+    {
+      id: 666,
+      projectTitle: 'Project title 3',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae faucibus et turpis tortor egestas. Suspendisse diam amet dictum non ac sed tortor, massa.',
+      rating: 3,
+      businessType: 'Startup',
+      businessName: 'Avalon ltd',
+      paymentCondition: 'Monthly payment',
+      paymentType: 'Credit card'
+    }
+  ];
 
   get contractConditions () {
     const value = getContractConditionSelectOptions()
@@ -100,11 +108,18 @@ export default class SeekerSearch extends Vue {
     return getProjectTypeSelectOptions()
   }
 
-  //  filterThrough () {
-  //   for (const i in this.SeekerResult) {
-  //       return
-  //     }
-  //   }
+  get filterThrough () {
+    return this.SeekerResult.filter(result => {
+      return result.projectTitle.toLowerCase().match(this.searchFilter)
+    })
+    // if(this.SeekerResult){
+    //   return this.SeekerResult.filter((item)=>{
+    //   return this.SeekerResult.toLowerCase().split(' ').every(e => item.title.toLowerCase().includes(e))
+    // })
+    // }else{
+    //   return this.SeekerResult;
+    // }
+  }
 
   contractConditionSelected (selectedOptions: ContractCondition[]) {
     console.log('selected contract conditions', selectedOptions)
@@ -125,15 +140,15 @@ export default class SeekerSearch extends Vue {
 </script>
 
 <style lang="scss" scope>
-.seeker-feed{
+.seeker-feed {
   display: flex;
-  .result{
+  .result {
     padding: 0 3rem;
-    .search-bar{
-        div{
-          display: inline;
-        }
+    .search-bar {
+      div {
+        display: inline;
       }
-   }
+    }
+  }
 }
 </style>

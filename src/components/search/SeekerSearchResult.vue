@@ -16,7 +16,7 @@
 
 <script lang='ts'>
 import { Component, Vue, Prop } from 'vue-property-decorator'
-import { SeekerSearchResults } from '@/components/search/SeekerSearch.vue'
+import filterThrough from '@/components/search/SeekerSearch.vue'
 // import Rating from '@/components/Rating.vue'
 
 // @Component({
@@ -26,7 +26,7 @@ import { SeekerSearchResults } from '@/components/search/SeekerSearch.vue'
 // })
 @Component
 export default class Project extends Vue {
- @Prop() resultData!: SeekerSearchResults[]
+ @Prop() resultData!: filterThrough
 }
 
 </script>
