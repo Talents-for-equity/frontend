@@ -93,6 +93,13 @@ export const businessTypeNames: { [id: number]: string } = {}
 businessTypeNames[BusinessType.BusinessAngel] = 'Business Angel'
 businessTypeNames[BusinessType.Investor] = 'Investor'
 
+export enum ExpertiseLevel {
+  Student,
+  Freelancer,
+  Contractor,
+  TeamLead
+}
+
 export interface SelectOption {
   key: number;
   name: string;
