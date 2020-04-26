@@ -5,6 +5,7 @@ import RegistrationForm from '../views/Registration.vue'
 import Login from '../views/Login.vue'
 import Profile from '../views/Profile.vue'
 import Search from '../views/Search.vue'
+import Contact from '../views/Contact.vue'
 
 Vue.use(VueRouter)
 
@@ -42,6 +43,11 @@ const routes: Array<RouteConfig> = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: Contact
   }
 ]
 
