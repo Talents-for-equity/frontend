@@ -6,6 +6,7 @@ import Login from '../views/Login.vue'
 import Profile from '../views/Profile.vue'
 import Search from '../views/Search.vue'
 import Preregistration from '../views/Preregistration.vue'
+import MapView from '../views/MapView.vue'
 
 Vue.use(VueRouter)
 
@@ -38,6 +39,11 @@ const routes: Array<RouteConfig> = [
     path: '/profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/mapview',
+    name: 'MapView',
+    component: MapView
   },
   {
     path: '/login',

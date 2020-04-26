@@ -87,7 +87,7 @@ export default class Preregistration extends Vue {
   async submitContact () {
     // sendinblue.track('preregistration', this.contactForm)
     this.showForm = false
-    await Axios.post('https://tfe.pandemy.xyz:8080/mapping', this.contactForm)
+    await Axios.post('https://tfe-reg.pandemy.xyz/mapping', this.contactForm)
   }
 }
 </script>
