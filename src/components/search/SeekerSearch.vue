@@ -1,6 +1,16 @@
 <template>
   <div class="seeker-feed">
     <Filters
+      :options="typeOfProjects"
+      title="Type of projects"
+      v-on:optionSelected="typeOfProjectsSelected"
+    />
+    <Filters
+      :options="typeOfPayment"
+      title="Type of projects"
+      v-on:optionSelected="typeOfPaymentSelected"
+    />
+    <Filters
       :options="contractConditions"
       title="Contracting conditions"
       v-on:optionSelected="contractConditionSelected"
@@ -20,7 +30,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import {
   ContractCondition,
-  getContractConditionSelectOptions
+  getContractConditionSelectOptions, getPaymentTypeSelectOptions, getProjectTypeSelectOptions, PaymentType, ProjectType
 } from '@/store/modules/users'
 import Filters from '@/components/search/Filters.vue'
 import SeekerSearchResult from '@/components/search/SeekerSearchResult.vue'
@@ -86,14 +96,30 @@ export default class SeekerSearch extends Vue {
     return value
   }
 
+  get typeOfProjects () {
+    return getProjectTypeSelectOptions()
+  }
+
   //  filterThrough () {
   //   for (const i in this.SeekerResult) {
-  //       return 
+  //       return
   //     }
   //   }
 
   contractConditionSelected (selectedOptions: ContractCondition[]) {
     console.log('selected contract conditions', selectedOptions)
+  }
+
+  typeOfProjectsSelected (projectTypes: ProjectType[]) {
+    console.log('selected types', projectTypes)
+  }
+
+  get typeOfPayment () {
+    return getPaymentTypeSelectOptions()
+  }
+
+  typeOfPaymentSelected (paymentTypes: PaymentType[]) {
+    console.log('selected types', paymentTypes)
   }
 }
 </script>
