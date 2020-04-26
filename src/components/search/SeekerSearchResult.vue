@@ -1,14 +1,14 @@
 <template>
    <div>
-     <h4>Project title</h4>
-     <!-- <div class="description">
-         <p>{{ resultData.projectTitle }}</p>
-          <p>{{ resultData.rating }}</p>
-         <p>{{ resultData.description }}</p>
-     </div> -->
-    <div v-for="data in resultData" :key="data.key">
-        <p>{{ data.id }}</p>
-        <p>{{ data.projectTitle }}</p>
+    <div  class="seeker-results" v-for="data in resultData" :key="data.key">
+        <h4>{{ data.projectTitle }}</h4>
+        <!-- <Rating :rating="data.rating"></Rating> -->
+        <div class="tags">
+            <p>{{ data.businessType }}</p>
+            <p>{{ data.businessName }}</p>
+            <p>{{ data.paymentCondition }}</p>
+            <p>{{ data.paymentType }}</p>
+        </div>
         <p>{{ data.description }}</p>
      </div>
     </div>
@@ -17,7 +17,13 @@
 <script lang='ts'>
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { SeekerSearchResults } from '@/components/search/SeekerSearch.vue'
+// import Rating from '@/components/Rating.vue'
 
+// @Component({
+//   components: {
+//     Rating
+//   }
+// })
 @Component
 export default class Project extends Vue {
  @Prop() resultData!: SeekerSearchResults[]
@@ -25,6 +31,20 @@ export default class Project extends Vue {
 
 </script>
 
-<style lang="scss">
-
+<style lang="scss" scope>
+.seeker-results{
+   margin: 1rem 0;
+   h4{
+       font-size: 1.7rem;
+   }
+   .tags{
+       color:#1667E0;
+       font-weight: bold;
+       font-size: .8rem;
+       p{
+         display: inline;
+         margin-right: 1rem;
+       }
+   }
+}
 </style>

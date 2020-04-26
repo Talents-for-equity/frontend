@@ -1,16 +1,12 @@
 <template>
    <div>
-     <!-- <img src="" alt="" srcset=""> -->
-     <p>{{ messageData.firstName }} {{ messageData.lastName }}</p>
-     <p>{{ messageData.rating }}</p>
-     <p>{{ messageData.lastText }}</p>
-     <!-- <div v-for="i in messageData" :key="i.key">
+     <div v-for="i in messageData" :key="i.key">
         <p>{{ i.firstName }} {{ i.lastName }}</p>
-        <p>{{ i.firstName }}</p>
-        <p>{{ i.lastName }}</p>
-     </div> -->
-     <input type="button" value="Archive" />
-     <input type="button" value="Reply" />
+        <p>{{ i.rating }}</p>
+        <p>{{ i.lastText }}</p>
+        <input type="button" value="Archive" />
+        <input type="button" value="Reply" />
+     </div>
     </div>
 </template>
 
