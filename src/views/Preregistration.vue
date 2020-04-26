@@ -1,6 +1,6 @@
 <template>
   <div class="preRegistration">
-    <div v-if="showForm">
+    <div v-if="showForm" class="form">
 
       <div>
         <div class="label">Username</div>
@@ -29,23 +29,37 @@
 
       <div>
         <div class="label">Profession</div>
-        <input type="text" v-model="contactForm.profession">
-      </div>
-
-      <div>
-        <div class="label">I am expert and talent</div>
-        <input type="checkbox" v-model="contactForm.talent">
-      </div>
-
-       <div>
-        <div class="label">I am interested to find talents and experts for my business</div>
-        <input type="checkbox" v-model="contactForm.seeker">
-      </div>
-      <div>
-        <div class="label">Newsletter. Just facts, no spam, no ads.</div>
-        <input type="checkbox" v-model="contactForm.newsletter">
+        <input type="text" v-model="contactForm.profession" placeholder=" e.g. Developer">
       </div>
       <button v-on:click="submitContact">Submit</button>
+    </div>
+    <div class="checkboxes">
+       <!-- <div>
+        <input type="checkbox" v-model="contactForm.talent">
+        <label class="label">I am expert and talent</label>
+      </div> -->
+    <!-- <div class="checkboxWrapper">
+            <input type="checkbox" v-model="contactForm.seeker">
+            <div class="label">I am interested to find talents and experts for my business</div>
+          </div>
+          <div class="checkboxWrapper">
+            <input type="checkbox" v-model="contactForm.newsletter">
+            <div class="label">Newsletter. Just facts, no spam, no ads.</div>
+          </div> -->
+      <label class="checkboxWrapper">
+        <input type="checkbox" v-model="contactForm.talent"> I am expert and talent
+        <span class="checkmark"></span>
+      </label>
+
+      <label class="checkboxWrapper">
+        <input type="checkbox" v-model="contactForm.seeker">I am interested to find talents and experts for my business
+        <span class="checkmark"></span>
+      </label>
+
+      <label class="checkboxWrapper">
+        <input type="checkbox" v-model="contactForm.newsletter"> Newsletter. Just facts, no spam, no ads.
+        <span class="checkmark"></span>
+      </label>
     </div>
   </div>
 </template>
@@ -98,19 +112,37 @@ export default class Preregistration extends Vue {
 
 <style lang="scss" scoped>
 .preRegistration{
-  padding: 3rem 7.5rem;
-  font-size: 1rem;
+  padding-top: 3rem;
+  width: 80%;
+  margin: auto;
+  font-size: 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  .checkboxes, .form{
+    padding: 4rem;
+  }
+  .checkboxWrapper{
+    display: flex;
+    padding: .5rem;
+    font-weight: 500;
+    input[type=checkbox]{
+      margin-right: 1rem;
+    }
+  }
 }
   .submitButton {
     margin-top: 1em;
   }
 
-  input, textarea {
+  input[type=text]{
     border: 1px solid #C4C4C4;
     box-sizing: border-box;
     border-radius: 7px;
-    height: 30px;
+    height: 2.5rem;
     width: 300px;
+    padding-left: .5rem;
+    margin-bottom: 1rem;
   }
 
   textarea {
@@ -118,9 +150,8 @@ export default class Preregistration extends Vue {
   }
 
   .label {
-    margin-top: 0.5em;
+    margin-bottom: 0.5em;
     font-weight: 500;
-    font-size: 16px;
     color: #595959;
   }
 
