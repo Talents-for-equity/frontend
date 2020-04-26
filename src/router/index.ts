@@ -7,6 +7,7 @@ import Profile from '../views/Profile.vue'
 import Search from '../views/Search.vue'
 import Preregistration from '../views/Preregistration.vue'
 import MapView from '../views/MapView.vue'
+import Prototype from '../views/Prototype.vue'
 
 Vue.use(VueRouter)
 
@@ -54,6 +55,11 @@ const routes: Array<RouteConfig> = [
     path: '/preregistration',
     name: 'Preregistration',
     component: Preregistration
+  },
+  {
+    path: '/prototype',
+    name: 'Prototype',
+    component: Prototype
   }
 ]
 

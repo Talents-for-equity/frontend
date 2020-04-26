@@ -1,7 +1,8 @@
 <template>
   <div>
+    <PrototypeLinks></PrototypeLinks>
     <div class="profileButtons">
-      <button v-on:click="logout">Logout</button>
+<!--      <button v-on:click="logout">Logout</button>-->
       <button v-on:click="edit" v-if="view">Edit</button>
       <button v-on:click="showView" v-if="!view">View</button>
     </div>
@@ -16,9 +17,11 @@ import ProfileEdit from '@/components/ProfileEdit.vue'
 import ProfileView from '@/components/ProfileView.vue'
 import users from '@/store/modules/users'
 import router from '@/router'
+import PrototypeLinks from '@/components/PrototypeLinks.vue'
 
 @Component({
   components: {
+    PrototypeLinks,
     ProfileView,
     ProfileEdit
   }

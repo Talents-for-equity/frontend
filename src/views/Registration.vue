@@ -1,5 +1,6 @@
 <template>
   <div>
+    <PrototypeLinks></PrototypeLinks>
     <div id="isSeekerTalent">
       <h2>Are you a</h2>
       <input v-on:click="userStatus" class="blue-button" type="button" value="Seeker" />
@@ -20,9 +21,11 @@ import { Component, Vue, Emit } from 'vue-property-decorator'
 import RegistrationForm from '@/components/RegistrationForm.vue'
 import RegistrationSuccessful from '@/components/RegistrationSuccessful.vue'
 import IsSeekerTalent from '@/components/IsSeekerTalent.vue'
+import PrototypeLinks from '@/components/PrototypeLinks.vue'
 
 @Component({
   components: {
+    PrototypeLinks,
     RegistrationForm,
     RegistrationSuccessful,
     IsSeekerTalent

@@ -1,5 +1,6 @@
 <template>
    <div>
+     <PrototypeLinks></PrototypeLinks>
       <div class="feed">
         <!-- <TalentSearch/> -->
         <SeekerSearch/>
@@ -13,9 +14,11 @@
 import { Component, Vue } from 'vue-property-decorator'
 import TalentSearch from '@/components/search/TalentSearch.vue'
 import SeekerSearch from '@/components/search/SeekerSearch.vue'
+import PrototypeLinks from '@/components/PrototypeLinks.vue'
 
 @Component({
   components: {
+    PrototypeLinks,
     TalentSearch,
     SeekerSearch
   }

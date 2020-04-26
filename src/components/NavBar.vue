@@ -1,9 +1,8 @@
 <template>
-   <div id="nav">
-      <router-link to="/">I need help </router-link>
-      <router-link v-if="isLoggedIn" to="/profile">My account</router-link>
-      <router-link v-if="!isLoggedIn" to="/login">My account</router-link>
-    </div>
+  <div id="nav">
+    <router-link to="/">Home</router-link>
+    <router-link to="/profile">Prototype</router-link>
+  </div>
 </template>
 
 <script lang='ts'>
@@ -19,19 +18,21 @@ export default class NavBar extends Vue {
 </script>
 
 <style lang="scss">
-#nav {
-  box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.05);
-  text-align: right;
-  padding: 1rem 4rem 1rem 0rem;
-  a {
-    padding: 1rem;
-    font-weight: bold;
-    color: #2c3e50;
-    text-decoration: none;
-    transition: .1s;
-    &.router-link-exact-active, &:hover {
-      text-decoration: underline;
+  #nav {
+    box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.05);
+    text-align: right;
+    padding: 1rem 4rem 1rem 0rem;
+
+    a {
+      padding: 1rem;
+      font-weight: bold;
+      color: #2c3e50;
+      text-decoration: none;
+      transition: .1s;
+
+      &.router-link-exact-active, &:hover {
+        text-decoration: underline;
+      }
     }
   }
-}
 </style>

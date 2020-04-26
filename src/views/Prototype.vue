@@ -1,26 +1,19 @@
 <template>
   <div>
     <PrototypeLinks></PrototypeLinks>
-    <LoginForm/>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import LoginForm from '@/components/LoginForm.vue'
 import PrototypeLinks from '@/components/PrototypeLinks.vue'
 
 @Component({
   components: {
     PrototypeLinks,
-    LoginForm
+    ProfileLinks: PrototypeLinks
   }
 })
-export default class Login extends Vue {
-
+export default class Prototype extends Vue {
 }
 </script>
-
-<style>
-
-</style>
