@@ -1,7 +1,12 @@
 <template>
   <div class="leafLetMap">
-    <h1>Talents and supporters EU hackaton</h1>
-      <l-map style="height: 350px" :zoom="zoom" :center="center">
+    <h2 class="header">Take a look at how many people joined the hackathon</h2>
+    <h3 class="thankYou">Thank you for "liking" us:
+      <a href="https://devpost.com/software/talents-for-equity-w5hnuc" target="_blank"
+         rel="noopener noreferrer">
+        https://devpost.com/software/talents-for-equity-w5hnuc
+      </a></h3>
+    <l-map style="height: 350px" :zoom="zoom" :center="center">
         <l-tile-layer :url="url"></l-tile-layer>
         <l-marker v-for="data in markers" v-bind:key="data.key"
                   :lat-lng="data.latLang" v-on:click="markerClicked(data.people)"></l-marker>
@@ -139,6 +144,13 @@ export default class LeafletMap extends Vue {
 </script>
 
 <style lang="scss">
+  .thankYou {
+    a {
+      color: red;
+    }
+    margin-bottom: 0.5em;
+  }
+
   .leafLetMap {
     text-align: center;
 
@@ -151,5 +163,9 @@ export default class LeafletMap extends Vue {
 
   th, td {
     padding-right: 1em;
+  }
+
+  .header {
+    margin-bottom: 0.5em;
   }
 </style>
