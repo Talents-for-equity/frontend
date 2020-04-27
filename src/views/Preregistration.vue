@@ -105,6 +105,7 @@ export default class Preregistration extends Vue {
 <style lang="scss" scoped>
 .preRegistration{
   padding-top: 3rem;
+  padding-bottom: 3rem;
   font-size: 1rem;
   .checkboxes{
     padding: 1rem 0;
