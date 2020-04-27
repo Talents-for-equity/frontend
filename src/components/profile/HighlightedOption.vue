@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { Component, Emit, Prop, Vue } from 'vue-property-decorator'
-import { SelectOption } from '@/store/modules/users'
+import { SelectOption } from '@/store/modules/user/user'
 
 @Component
 export default class HighlightOption extends Vue {

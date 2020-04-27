@@ -16,13 +16,10 @@
 
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator'
-import {
-  ContractCondition,
-  getContractConditionSelectOptions
-} from '@/store/modules/users'
 import Filters from '@/components/search/Filters.vue'
 import SeekerSearchResult from '@/components/search/SeekerSearchResult.vue'
 import Messages from '@/components/search/Messages.vue'
+import { ContractCondition, getContractConditionSelectOptions } from '@/store/modules/user/user'
 
 export interface SeekerSearchResults {
   id: number;

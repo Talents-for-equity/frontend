@@ -48,8 +48,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import users, { User, UserType } from '@/store/modules/users'
+import users from '@/store/modules/user/users'
 import HighlightedOption from '@/components/profile/HighlightedOption.vue'
+import { User, UserType } from '@/store/modules/user/user'
 
 @Component({
   components: { HighlightedOption }

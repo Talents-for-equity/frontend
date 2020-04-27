@@ -12,10 +12,10 @@
 
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator'
-import { ContractCondition, getContractConditionSelectOptions } from '@/store/modules/users'
 import Filters from '@/components/search/Filters.vue'
 import TalentSearchResult from '@/components/search/TalentSearchResult.vue'
 import Messages from '@/components/search/Messages.vue'
+import { ContractCondition, getContractConditionSelectOptions } from '@/store/modules/user/user'
 
 export interface TalentSearchResults {
   id: number;

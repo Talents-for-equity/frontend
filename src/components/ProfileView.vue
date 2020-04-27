@@ -20,23 +20,21 @@
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator'
 import users, {
-  BusinessType,
-  businessTypeNames,
-  ContractCondition, getBusinessTypeOptions,
-  getContractConditionSelectOptions,
-  getPaymentTypeSelectOptions, getSkillSelectOptions,
-  PaymentType,
-  ProjectType, Skill,
-  skillNames,
-  User,
-  UserModule,
-  UserType
-} from '@/store/modules/users'
+  UserModule
+} from '@/store/modules/user/users'
 import HighlightOption from '@/components/profile/HighlightedOption.vue'
 import PortfolioProject from '@/components/profile/PortfolioProject.vue'
 import router from '@/router/index'
 import PersonalData from '@/components/profile/PersonalData.vue'
 import ProfileHeader from '@/components/profile/ProfileHeader.vue'
+import {
+  BusinessType,
+  businessTypeNames, ContractCondition,
+  getBusinessTypeOptions, getContractConditionSelectOptions,
+  getPaymentTypeSelectOptions,
+  getSkillSelectOptions, PaymentType, ProjectType, Skill, skillNames,
+  User, UserType
+} from '@/store/modules/user/user'
 
 @Component({
   components: {

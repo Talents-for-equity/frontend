@@ -5,7 +5,8 @@
 <script lang="ts">
 
 import { Component, Vue } from 'vue-property-decorator'
-import users, { User } from '@/store/modules/users'
+import users from '@/store/modules/user/users'
+import { User } from '@/store/modules/user/user'
 
 @Component
 export default class UserInfo extends Vue {

@@ -16,8 +16,9 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import users, { businessTypeNames, skillNames, User, UserType } from '@/store/modules/users'
+import users from '@/store/modules/user/users'
 import Rating from '@/components/Rating.vue'
+import { businessTypeNames, skillNames, User, UserType } from '@/store/modules/user/user'
 @Component({
   components: { Rating }
 })

@@ -8,7 +8,7 @@
 
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator'
-import users from '@/store/modules/users'
+import users from '@/store/modules/user/users'
 
 @Component
 export default class NavBar extends Vue {

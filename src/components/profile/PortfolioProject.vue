@@ -9,8 +9,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { Project } from '@/store/modules/users'
 import Rating from '@/components/Rating.vue'
+import { Project } from '@/store/modules/user/user'
 
 @Component({
   components: {

@@ -2,8 +2,8 @@
   <div>
     <div id="isSeekerTalent">
       <h2>Are you a</h2>
-      <input v-on:click="userStatus" class="blue-button" type="button" value="Seeker"/>
-      <input class="blue-button" type="button" value="Talent"/>
+      <input v-on:click="userIsSeeker = true" class="blue-button" type="button" value="Seeker"/>
+      <input @click="userIsSeeker = false" class="blue-button" type="button" value="Talent"/>
     </div>
 
     <RegistrationForm
@@ -33,14 +33,7 @@ export default class Registration extends Vue {
   private userIsSeeker = false
 
   register () {
-    console.log('more Jägermeister')
     this.showSuccessful = true
-  }
-
-  @Emit('userStatusUpdate')
-  public userStatus () {
-    console.log('Change status')
-    this.userIsSeeker = true
   }
 }
 </script>

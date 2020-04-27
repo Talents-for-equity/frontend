@@ -14,7 +14,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import ProfileEdit from '@/components/ProfileEdit.vue'
 import ProfileView from '@/components/ProfileView.vue'
-import users from '@/store/modules/users'
+import users from '@/store/modules/user/users'
 import router from '@/router'
 
 @Component({

@@ -12,7 +12,7 @@
 <script lang='ts'>
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
 import router from '@/router/index'
-import users from '@/store/modules/users'
+import users from '@/store/modules/user/users'
 
 @Component
 export default class LoginForm extends Vue {

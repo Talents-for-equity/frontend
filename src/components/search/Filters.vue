@@ -11,7 +11,7 @@
 
 <script lang='ts'>
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
-import { SelectOption } from '@/store/modules/users'
+import { SelectOption } from '@/store/modules/user/user'
 
 @Component
 export default class Filters extends Vue {
