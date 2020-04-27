@@ -129,9 +129,9 @@ export default class LeafletMap extends Vue {
         id: uuidv4(),
         avatar: values.avatar,
         profession: values.profession,
-        talent: values.talent === 'true',
-        seeker: values.seeker === 'true',
-        newsletter: values.newsletter === 'true'
+        talent: values.talent,
+        seeker: values.seeker,
+        newsletter: values.newsletter
       })
     })
     this.markers = Object.values(markerObjects)
