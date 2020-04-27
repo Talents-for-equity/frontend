@@ -31,12 +31,12 @@
       </div>
        <div class="checkboxes">
       <label class="checkboxWrapper container">
-        <input type="checkbox" v-model="contactForm.talent"> <span>I am expert and talent</span>
+        <input type="checkbox" v-model="contactForm.talent"> <span>I am expert and talent.</span>
          <span class="checkmark"></span>
       </label>
 
       <label class="checkboxWrapper container">
-        <input type="checkbox" v-model="contactForm.seeker"><span>I am interested to find talents and experts for my business</span>
+        <input type="checkbox" v-model="contactForm.seeker"><span>I am interested to find talents and experts for my business.</span>
          <span class="checkmark"></span>
       </label>
 

@@ -4,7 +4,7 @@
       <h3>Our team wanted to say thank you with <span class="heart">❤</span>️
         to all supporters, creators and attendees of this hackathon.
         We created this map and our solution for all of you to show your impact on Europe
-        and to stay connected with all talents.</h3>
+        and to stay connected with all talents afterwards.</h3>
       <div class="signup"><button @click="signUp">Sign Up</button></div>
     </div>
     <div class="map">
