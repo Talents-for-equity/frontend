@@ -1,4 +1,4 @@
-import { RegistrationValues, UserService } from '@/store/modules/user/UserService'
+import { RegistrationValues, UserAlreadyExistsError, UserService } from '@/store/modules/user/UserService'
 import {
   BusinessType,
   ContractCondition,
@@ -26,10 +26,9 @@ export class UserServiceLocalStorage implements UserService {
   }
 
   async createUser (values: RegistrationValues): Promise<User> {
-    const id = uuidv4()
     const user: PouchDBUser = {
-      _id: id,
-      id,
+      _id: values.username,
+      id: values.username,
       username: values.username,
       email: values.email,
       password: values.password,
@@ -49,7 +48,14 @@ export class UserServiceLocalStorage implements UserService {
       contractConditions: []
 
     }
-    await this.db.put(user)
+    try {
+      await this.db.put(user)
+    } catch (error) {
+      if (error.status === 409) {
+        throw new UserAlreadyExistsError(values.username)
+      }
+      throw error
+    }
     return user
   }
 }

@@ -6,6 +6,10 @@ export interface RegistrationValues {
   password: string;
 }
 
+export class UserAlreadyExistsError extends Error {
+  username = ''
+}
+
 export interface UserService {
-  createUser(values: RegistrationValues): Promise<User>
+  createUser(values: RegistrationValues): Promise<User>;
 }

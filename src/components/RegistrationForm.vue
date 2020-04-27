@@ -7,13 +7,17 @@
        <label>Password</label><input type="password" v-model="data.password" /> <br>
       <input type="button" v-on:click="sendRegistration" value="Register">
     </form>
+    <div v-if="error" class="error">
+      {{errorMessage}}
+    </div>
   </div>
 </template>
 
 <script lang='ts'>
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
 import users from '@/store/modules/user/users'
-import { RegistrationValues } from '@/store/modules/user/UserService'
+import { RegistrationValues, UserAlreadyExistsError } from '@/store/modules/user/UserService'
+import { User } from '@/store/modules/user/user'
 
 @Component
 export default class RegistrationForm extends Vue {
@@ -24,11 +28,28 @@ export default class RegistrationForm extends Vue {
     email: ''
   }
 
-  @Emit('register')
+  errorMessage = ''
+  error = false
+
   async sendRegistration () {
     console.log('send registration', this.data)
-    const result = await users.createUser(this.data)
-    console.log('wat result', result)
+    try {
+      const result = await users.createUser(this.data)
+      console.log('wat result', result)
+      this.emitRegistration(result)
+    } catch (error) {
+      this.error = true
+      if (error instanceof UserAlreadyExistsError) {
+        this.errorMessage = 'User already exists'
+      } else {
+        this.errorMessage = 'Some error occurred'
+      }
+    }
+  }
+
+  @Emit('register')
+  emitRegistration (user: User) {
+    return user
   }
 
   userStatusUpdate () {
@@ -43,6 +64,8 @@ interface RegistrationData {
 }
 </script>
 
-<style>
-
+<style scoped lang="scss">
+  .error {
+    color: red;
+  }
 </style>

@@ -88,7 +88,7 @@ export class UserModule extends VuexModule {
     return user
   }
 
-  @Action({ commit: 'setUser' })
+  @Action({ commit: 'setUser', rawError: true })
   public async createUser (values: RegistrationValues) {
     const result = await this.userService.createUser(values)
     return result
