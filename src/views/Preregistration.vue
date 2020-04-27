@@ -13,9 +13,11 @@
         <input type="email" v-model="contactForm.email">
       </div>
 
-      <div>
-        <div class="label">Country</div>
-        <input type="text" v-model="contactForm.country">
+      <div class="countrySelect">
+        <div class="countryLabel label">Country</div>
+        <md-autocomplete class="countryInput"
+                         v-model="contactForm.country" :md-options="countries">
+        </md-autocomplete>
       </div>
 
       <div>
@@ -31,9 +33,6 @@
       <div>
         <div class="label">Profession</div>
         <input type="text" v-model="contactForm.profession" placeholder=" e.g. Developer">
-      </div>
-      <div v-if="emailError" class="error">
-        Email address is invalid
       </div>
        <div class="checkboxes">
       <label class="checkboxWrapper container">
@@ -51,6 +50,12 @@
          <span class="checkmark"></span>
       </label>
     </div>
+      <div v-if="emailError" class="error">
+        Email address is invalid
+      </div>
+      <div v-if="countryError" class="error">
+        Country is invalid
+      </div>
       <button v-on:click="submitContact">Submit</button>
     </div>
   </div>
@@ -96,12 +101,14 @@ export default class Preregistration extends Vue {
 
   showForm = true
   emailError = false
+  countryError = false
+
+  countries = ['Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Anguilla', 'Antigua & Barbuda', 'Argentina', 'Armenia', 'Aruba', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bermuda', 'Bhutan', 'Bolivia', 'Bosnia & Herzegovina', 'Botswana', 'Brazil', 'British Virgin Islands', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cambodia', 'Cameroon', 'Cape Verde', 'Cayman Islands', 'Chad', 'Chile', 'China', 'Colombia', 'Congo', 'Cook Islands', 'Costa Rica', 'Cote D Ivoire', 'Croatia', 'Cruise Ship', 'Cuba', 'Cyprus', 'Czech Republic', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Estonia', 'Ethiopia', 'Falkland Islands', 'Faroe Islands', 'Fiji', 'Finland', 'France', 'French Polynesia', 'French West Indies', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Gibraltar', 'Greece', 'Greenland', 'Grenada', 'Guam', 'Guatemala', 'Guernsey', 'Guinea', 'Guinea Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hong Kong', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Isle of Man', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jersey', 'Jordan', 'Kazakhstan', 'Kenya', 'Kuwait', 'Kyrgyz Republic', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Macau', 'Macedonia', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Mauritania', 'Mauritius', 'Mexico', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Montserrat', 'Morocco', 'Mozambique', 'Namibia', 'Nepal', 'Netherlands', 'Netherlands Antilles', 'New Caledonia', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'Norway', 'Oman', 'Pakistan', 'Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Puerto Rico', 'Qatar', 'Reunion', 'Romania', 'Russia', 'Rwanda', 'Saint Pierre & Miquelon', 'Samoa', 'San Marino', 'Satellite', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'South Africa', 'South Korea', 'Spain', 'Sri Lanka', 'St Kitts & Nevis', 'St Lucia', 'St Vincent', 'St. Lucia', 'Sudan', 'Suriname', 'Swaziland', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor L\'Este', 'Togo', 'Tonga', 'Trinidad & Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Turks & Caicos', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'Uruguay', 'Uzbekistan', 'Venezuela', 'Vietnam', 'Virgin Islands (US)', 'Yemen', 'Zambia', 'Zimbabwe']
 
   async submitContact () {
-    if (this.isEmailInvalid()) {
+    if (this.isEmailInvalid() || this.isCountryInvalid()) {
       return
     }
-    this.showForm = false
     await Axios.post('https://tfe-reg.pandemy.xyz/mapping', this.contactForm)
     router.push('/')
   }
@@ -111,10 +118,24 @@ export default class Preregistration extends Vue {
     this.emailError = !re.test(this.contactForm.email)
     return this.emailError
   }
+
+  private isCountryInvalid () {
+    const found = this.countries.find(country => this.contactForm.country === country)
+    this.countryError = found === undefined
+    return this.countryError
+  }
 }
 </script>
 
 <style lang="scss" scoped>
+  .countrySelect {
+    position: relative;
+    top: -15px;
+    .md-field {
+      width: 300px;
+    }
+  }
+
 .preRegistration{
   padding-top: 3rem;
   font-size: 1rem;
@@ -141,7 +162,7 @@ input[type=checkbox]{
     height: 20px;
   }
 
-  input[type=text]{
+  input[type=text], input[type=email]{
     border: 1px solid #C4C4C4;
     box-sizing: border-box;
     border-radius: 7px;

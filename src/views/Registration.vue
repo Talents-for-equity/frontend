@@ -58,9 +58,10 @@ export default class Registration extends Vue {
 <style lang="scss">
   .countryInput {
     margin: 0;
+
   }
 
-  #app button {
+  #app .countryInput button {
     background: none;
     width: 32px;
   }
