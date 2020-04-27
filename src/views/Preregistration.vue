@@ -49,7 +49,7 @@
         Email address is invalid
       </div>
       <div v-if="countryError" class="error">
-        Country is invalid
+        Country in English
       </div>
       <div v-if="zipError" class="error">
         Zip code is required
