@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+
+  talents-for-equity:
+    image: talents-for-equity
+    container_name: talents-for-equity
+    restart: "no"
+    volumes:
+      - ./:/app/
+    logging:
+      driver: journald
+    ports:
+    - 8081:8080
