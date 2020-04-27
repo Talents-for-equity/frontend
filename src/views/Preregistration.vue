@@ -24,7 +24,7 @@
       </div>
 
       <div>
-        <div class="label">LinkedIn</div>
+        <div class="label">LinkedIn <span>*Optional</span></div>
         <input type="text" v-model="contactForm.linkedin">
       </div>
 
@@ -35,35 +35,23 @@
       <div v-if="emailError" class="error">
         Email address is invalid
       </div>
-      <button v-on:click="submitContact">Submit</button>
+       <div class="checkboxes">
+      <label class="checkboxWrapper container">
+        <input type="checkbox" v-model="contactForm.talent"> <span>I am expert and talent</span>
+         <span class="checkmark"></span>
+      </label>
+
+      <label class="checkboxWrapper container">
+        <input type="checkbox" v-model="contactForm.seeker"><span>I am interested to find talents and experts for my business</span>
+         <span class="checkmark"></span>
+      </label>
+
+      <label class="checkboxWrapper container">
+        <input type="checkbox" v-model="contactForm.newsletter"> <span>Newsletter. Just facts, no spam, no ads.</span>
+         <span class="checkmark"></span>
+      </label>
     </div>
-    <div class="checkboxes">
-       <!-- <div>
-        <input type="checkbox" v-model="contactForm.talent">
-        <label class="label">I am expert and talent</label>
-      </div> -->
-    <!-- <div class="checkboxWrapper">
-            <input type="checkbox" v-model="contactForm.seeker">
-            <div class="label">I am interested to find talents and experts for my business</div>
-          </div>
-          <div class="checkboxWrapper">
-            <input type="checkbox" v-model="contactForm.newsletter">
-            <div class="label">Newsletter. Just facts, no spam, no ads.</div>
-          </div> -->
-      <label class="checkboxWrapper">
-        <input type="checkbox" v-model="contactForm.talent"> I am expert and talent
-        <span class="checkmark"></span>
-      </label>
-
-      <label class="checkboxWrapper">
-        <input type="checkbox" v-model="contactForm.seeker">I am interested to find talents and experts for my business
-        <span class="checkmark"></span>
-      </label>
-
-      <label class="checkboxWrapper">
-        <input type="checkbox" v-model="contactForm.newsletter"> Newsletter. Just facts, no spam, no ads.
-        <span class="checkmark"></span>
-      </label>
+      <button v-on:click="submitContact">Submit</button>
     </div>
   </div>
   </div>
@@ -129,36 +117,36 @@ export default class Preregistration extends Vue {
 <style lang="scss" scoped>
 .preRegistration{
   padding-top: 3rem;
-  width: 80%;
-  max-width: 1500px;
-  margin: auto;
-  font-size: 1.2rem;
+  font-size: 1rem;
   .checkboxes{
     padding: 1rem 0;
   }
   .form{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-   .checkboxWrapper{
-    display: flex;
-    padding: .5rem;
-    font-weight: 500;
-    input[type=checkbox]{
-      margin-right: 1rem;
-    }
-  }
+    justify-content: center;
+    max-width: 350px;
+     margin: auto;
+     .label{
+       span{
+         font-size: .7rem;
+       }
+     }
   }
 }
   .submitButton {
     margin-top: 1em;
   }
 
-  input[type=text], input[type=email]{
+input[type=checkbox]{
+    width: 20px;
+    height: 20px;
+  }
+
+  input[type=text]{
     border: 1px solid #C4C4C4;
     box-sizing: border-box;
     border-radius: 7px;
     height: 2.5rem;
+    font-size: 1rem;
     width: 300px;
     padding-left: .5rem;
     margin-bottom: 1rem;
@@ -188,4 +176,61 @@ export default class Preregistration extends Vue {
     color: red;
     margin-bottom: 5px;
   }
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+    input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    &:after {
+      left: 9px;
+      top: 5px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+  }
+}
+
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.container input:checked ~ .checkmark {
+  background-color: rgb(116, 184, 240);
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
 </style>
